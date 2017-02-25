@@ -3,13 +3,6 @@
   timezone:
     name: UTC
 
-- name: Start and Enable Network Time Protocol
-  become: true
-  service:
-    name: ntpd
-    state: started
-    enabled: yes
-
 - name: Install 2600hz Stable Repo
   become: true
   yum:

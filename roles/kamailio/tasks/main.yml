@@ -1,0 +1,13 @@
+---
+- name: Install Kamailio
+  become: true
+  yum:
+    name: kazoo-kamailio
+    state: installed
+
+- name: Start Kamailio
+  become: true
+  service:
+    name: kazoo-kamailio
+    state: started
+

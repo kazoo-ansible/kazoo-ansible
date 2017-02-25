@@ -3,6 +3,10 @@
   roles:
   - role: common
 
+- hosts: kamailio
+  roles:
+  - role: kamailio
+
 - hosts: rabbitmq
   roles:
   - role: rabbitmq
