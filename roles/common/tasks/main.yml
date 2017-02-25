@@ -3,12 +3,6 @@
   timezone:
     name: UTC
 
-- name: Install Network Time Protocol
-  become: true
-  yum:
-    name: ntp
-    state: latest
-
 - name: Start and Enable Network Time Protocol
   become: true
   service:
