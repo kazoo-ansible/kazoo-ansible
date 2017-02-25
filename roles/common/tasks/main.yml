@@ -1,3 +1,8 @@
+- name: Set System Time to UTC
+  become: true
+  timezone:
+    name: UTC
+
 - name: Install 2600hz Stable Repo
   become: true
   yum:
