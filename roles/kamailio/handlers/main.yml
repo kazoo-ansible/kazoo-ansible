@@ -1,5 +1,5 @@
 ---
-- name: restart kamailio
+- name: Restart Kamailio
   become: true
   service:
     name: kamailio
