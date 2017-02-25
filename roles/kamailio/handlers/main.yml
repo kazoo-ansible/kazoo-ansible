@@ -2,6 +2,6 @@
 - name: Restart Kamailio
   become: true
   service:
-    name: kamailio
+    name: kazoo-kamailio
     state: restarted
 

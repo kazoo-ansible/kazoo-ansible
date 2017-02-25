@@ -5,8 +5,33 @@
 
 - name: Install 2600hz Stable Repo
   become: true
-  yum:
-    name: https://packages.2600hz.com/centos/7/stable/2600hz-release/2600hz-release-4.0-2.el7.centos.noarch.rpm
-    state: present
-    validate_certs: no
+  yum_repository:
+    name: 2600hz-stable
+    description: 2600hz Stable Repository
+    baseurl: https://packages.2600hz.com/centos/$releasever/stable
+    gpgcheck: no
+    sslverify: no
+
+- name: Install FreeSwitch GPG
+  become: true
+  copy:
+    src: RPM-GPG-KEY-FREESWITCH
+    dest: /etc/pki/rpm-gpg
+
+- name: Install FreeSwitch Repository
+  become: true
+  yum_repository:
+    name: freeswitch
+    description: FreeSwitch Repository
+    baseurl: http://files.freeswitch.org/yum-1.6/$releasever/$basearch
+    gpgcheck: yes
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-FREESWITCH
+
+- name: Install Kamailio Repository
+  become: true
+  yum_repository:
+    name: kamailio
+    description: Kamailio Repository
+    baseurl: http://download.opensuse.org/repositories/home:/kamailio:/v4.4.x-rpms/CentOS_$releasever/
+    gpgcheck: no
 

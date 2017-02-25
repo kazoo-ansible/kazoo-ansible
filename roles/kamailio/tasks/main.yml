@@ -9,7 +9,7 @@
 - name: Start and Enable Kamailio
   become: true
   service:
-    name: kamailio
+    name: kazoo-kamailio
     state: started
     enabled: yes
 

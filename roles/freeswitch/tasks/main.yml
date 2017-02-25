@@ -1,0 +1,13 @@
+---
+- name: Install FreeSwitch
+  become: true
+  yum:
+    name: kazoo-freeswitch
+    state: latest
+
+- name: Start and Enable FreeSwitch
+  become: true
+  service:
+    name: kazoo-freeswitch
+    state: started
+    enabled: yes
