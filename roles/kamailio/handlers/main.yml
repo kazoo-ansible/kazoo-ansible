@@ -1,0 +1,7 @@
+---
+- name: restart kamailio
+  become: true
+  service:
+    name: kamailio
+    state: restarted
+

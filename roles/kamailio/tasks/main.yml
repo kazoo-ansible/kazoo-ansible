@@ -4,10 +4,26 @@
   yum:
     name: kazoo-kamailio
     state: installed
+  notify: restart kamailio
 
 - name: Start Kamailio
   become: true
   service:
-    name: kazoo-kamailio
+    name: kamailio
     state: started
+    enabled: yes
+
+- name: Create local.cfg
+  become: true
+  template:
+    src: local.cfg.j2
+    dest: /etc/kazoo/kamailio/local.cfg
+  notify: restart kamailio
+
+- name: Create dispatcher
+  become: true
+  template:
+    src: dispatcher.j2
+    dest: /etc/kazoo/kamailio/dbtext/dispatcher
+  notify: restart kamailio
 
