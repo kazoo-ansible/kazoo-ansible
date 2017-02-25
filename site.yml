@@ -1,0 +1,9 @@
+---
+- hosts: all
+  roles:
+  - role: common
+
+- hosts: rabbitmq
+  roles:
+  - role: rabbitmq
+

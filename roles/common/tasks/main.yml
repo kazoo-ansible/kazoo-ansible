@@ -1,0 +1,7 @@
+- name: Install 2600hz Stable Repo
+  become: true
+  yum:
+    name: https://packages.2600hz.com/centos/7/stable/2600hz-release/2600hz-release-4.0-2.el7.centos.noarch.rpm
+    state: present
+    validate_certs: no
+
