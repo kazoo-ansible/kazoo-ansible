@@ -1,4 +1,20 @@
 ---
+- name: Install HAProxy
+  yum:
+    name: kazoo-haproxy
+    state: latest
+
+- name: Start and Enable HAProxy
+  service:
+    name: kazoo-haproxy
+    state: started
+
+- name: Create HAProxy haproxy.cfg
+  template:
+    src: haproxy.cfg.j2
+    dest: /etc/kazoo/haproxy/haproxy.cfg
+  notify: Restart HAProxy
+
 - name: Install Kazoo
   yum:
     name: {{ item }}
