@@ -3,6 +3,20 @@
   timezone:
     name: UTC
 
+- name: Install EPEL GPG
+  become: true
+  copy:
+    src: RPM_GPG_KEY-EPEL-7
+    dest: /etc/pki/rpm-gpg
+
+- name: Install EPEL Repo
+  become: true
+  yum_repository:
+    name: epel
+    description: Extra Packages for Enterprise Linux (EPEL) Repo
+    baseurl: https://download.fedoraproject.org/pub/epel/$releasever/$basearch
+    gpgkey: file:///etc/pki/rpm-gpg/RPM_GPG_KEY-EPEL-7
+
 - name: Install 2600hz Stable Repo
   become: true
   yum_repository:
@@ -24,7 +38,6 @@
     name: freeswitch
     description: FreeSwitch Repository
     baseurl: http://files.freeswitch.org/yum-1.6/$releasever/$basearch
-    gpgcheck: yes
     gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-FREESWITCH
 
 - name: Install Kamailio Repository

@@ -15,3 +15,7 @@
   roles:
   - role: kamailio
 
+- hosts: bigcouch
+  roles:
+  - role: bigcouch
+

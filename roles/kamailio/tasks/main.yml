@@ -3,7 +3,7 @@
   become: true
   yum:
     name: kazoo-kamailio
-    state: installed
+    state: latest
   notify: Restart Kamailio
 
 - name: Start and Enable Kamailio

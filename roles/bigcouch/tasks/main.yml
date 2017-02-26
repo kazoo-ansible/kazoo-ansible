@@ -1,0 +1,14 @@
+---
+- name: Install BigCouch
+  become: true
+  yum:
+    name: kazoo-bigcouch
+    state: latest
+
+- name: Start and Enable BigCouch
+  become: true
+  service:
+    name: kazoo-bigcouch
+    state: started
+    enabled: yes
+
