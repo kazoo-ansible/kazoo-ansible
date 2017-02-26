@@ -1,11 +1,9 @@
 ---
 - name: Install RabbitMQ
-  become: true
   yum:
     name: kazoo-rabbitmq
     state: latest
 - name: Start and Enable RabbitMQ 
-  become: true
   service:
     name: kazoo-rabbitmq
     state: started

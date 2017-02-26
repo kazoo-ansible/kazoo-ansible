@@ -1,6 +1,5 @@
 ---
 - name: Install Kazoo
-  become: true
   yum:
     name: {{ item }}
     state: latest
@@ -9,14 +8,12 @@
    - kazoo-application-*
 
 - name: Start and Enable Kazoo Applications
-  become: true
   service:
     name: kazoo-applications
     state: started
     enabled: yes
 
 - name: Start and Enable ecallmgr
-  become: true
   service:
     name: kazoo-ecallmgr
     state: started

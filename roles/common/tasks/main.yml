@@ -1,16 +1,13 @@
 - name: Set System Time to UTC
-  become: true
   timezone:
     name: UTC
 
 - name: Install EPEL GPG
-  become: true
   copy:
     src: RPM_GPG_KEY-EPEL-7
     dest: /etc/pki/rpm-gpg
 
 - name: Install EPEL Repo
-  become: true
   yum_repository:
     name: epel
     description: Extra Packages for Enterprise Linux (EPEL) Repo
@@ -18,7 +15,6 @@
     gpgkey: file:///etc/pki/rpm-gpg/RPM_GPG_KEY-EPEL-7
 
 - name: Install 2600hz Stable Repo
-  become: true
   yum_repository:
     name: 2600hz-stable
     description: 2600hz Stable Repository
@@ -27,13 +23,11 @@
     sslverify: no
 
 - name: Install FreeSwitch GPG
-  become: true
   copy:
     src: RPM-GPG-KEY-FREESWITCH
     dest: /etc/pki/rpm-gpg
 
 - name: Install FreeSwitch Repository
-  become: true
   yum_repository:
     name: freeswitch
     description: FreeSwitch Repository
@@ -41,7 +35,6 @@
     gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-FREESWITCH
 
 - name: Install Kamailio Repository
-  become: true
   yum_repository:
     name: kamailio
     description: Kamailio Repository

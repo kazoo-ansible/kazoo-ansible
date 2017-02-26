@@ -1,21 +1,26 @@
 ---
 - hosts: all
+  become: true
   roles:
   - role: common
 
 - hosts: rabbitmq
+  become: true
   roles:
   - role: rabbitmq
 
 - hosts: freeswitch
+  become: true
   roles:
   - role: freeswitch
 
 - hosts: kamailio
+  become: true
   roles:
   - role: kamailio
 
 - hosts: bigcouch
+  become: true
   roles:
   - role: bigcouch
 
