@@ -8,6 +8,7 @@
   service:
     name: kazoo-haproxy
     state: started
+    enabled: yes
 
 - name: Create HAProxy haproxy.cfg
   template:

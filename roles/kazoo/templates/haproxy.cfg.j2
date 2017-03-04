@@ -23,11 +23,15 @@ defaults
         
 listen bigcouch-data 127.0.0.1:15984
   balance roundrobin
-    server {{ ansible_hostname }} {{ ansible_default_ipv4.address }}:5984 check
+    {% for host in groups['bigcouch'] %}
+        server {{ hostvars[host]['ansible_nodename'] }} {{ hostvars[host]['ansible_default_ipv4']['address'] }}:5984 check
+    {% endfor %}
 
 listen bigcouch-mgr 127.0.0.1:15986
   balance roundrobin
-    server {{ ansible_hostname }} {{ ansible_default_ipv4.address }}:5986 check
+    {% for host in groups['bigcouch'] %}
+        server {{ hostvars[host]['ansible_nodename'] }} {{ hostvars[host]['ansible_default_ipv4']['address'] }}:5986 check
+    {% endfor %}
 
 listen haproxy-stats 127.0.0.1:22002
   mode http
