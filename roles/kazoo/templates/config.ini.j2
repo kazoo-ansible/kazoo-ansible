@@ -1,0 +1,33 @@
+{% for host in groups['rabbitmq'] %}
+[amqp]
+uri = "amqp://guest:guest@{{ hostvars[host]['ansible_default_ipv4']['address'] }}:5672"
+{% endfor %}
+
+[bigcouch]
+compact_automatically = true
+cookie = change_me
+ip = "127.0.0.1"
+port = 15984
+; username = "kazoo"
+; password = "supermegaexcellenttelephonyplatform"
+admin_port = 15986
+
+{% for host in groups['kazoo'] %}
+[whistle_apps]
+host = {{ hostvars[host]['ansible_default_ipv4']['address'] }}
+cookie = change_me
+
+[kazoo_apps]
+host = {{ hostvars[host]['ansible_default_ipv4']['address'] }}
+cookie = change_me
+
+[ecallmgr]
+host = {{ hostvars[host]['ansible_default_ipv4']['address'] }}
+cookie = change_me
+{% endfor %}
+
+[log]
+syslog = info
+console = notice
+file = error
+

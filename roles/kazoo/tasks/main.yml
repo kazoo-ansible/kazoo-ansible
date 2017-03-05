@@ -36,3 +36,9 @@
     state: started
     enabled: yes
 
+- name: Create Kazoo config.ini
+  template:
+    src: config.ini.j2
+    dest: /etc/kazoo/core/config.ini
+  notify: Restart Kazoo
+
