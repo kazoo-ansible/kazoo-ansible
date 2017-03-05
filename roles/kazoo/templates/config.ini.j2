@@ -14,15 +14,15 @@ admin_port = 15986
 
 {% for host in groups['kazoo'] %}
 [whistle_apps]
-host = {{ hostvars[host]['ansible_default_ipv4']['address'] }}
+host = {{ hostvars[host]['ansible_nodename'] }}
 cookie = change_me
 
 [kazoo_apps]
-host = {{ hostvars[host]['ansible_default_ipv4']['address'] }}
+host = {{ hostvars[host]['ansible_nodename'] }}
 cookie = change_me
 
 [ecallmgr]
-host = {{ hostvars[host]['ansible_default_ipv4']['address'] }}
+host = {{ hostvars[host]['ansible_nodename'] }}
 cookie = change_me
 {% endfor %}
 
