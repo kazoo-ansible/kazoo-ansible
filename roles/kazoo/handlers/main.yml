@@ -12,3 +12,8 @@
    - kazoo-applications
    - kazoo-ecallmgr
 
+- name: Restart Nginx
+  service:
+    name: nginx
+    state: restarted
+
