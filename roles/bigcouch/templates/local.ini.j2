@@ -1,5 +1,5 @@
 [admins]
-{{ couch_user }} = {{ couch_password }}
+{{ couch_user }} = {{ couch_hash.stdout_lines[0] }}
 
 [chttpd]
 secret = 53e20840c5b911e28b8b0800200c9a66
