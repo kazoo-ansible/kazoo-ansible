@@ -4,6 +4,12 @@
     name: kazoo-freeswitch
     state: latest
 
+- name: Stop and Disable Default FreeSwitch
+  service:
+    name: freeswitch
+    state: stopped
+    enabled: no
+
 - name: Start and Enable FreeSwitch
   service:
     name: kazoo-freeswitch
