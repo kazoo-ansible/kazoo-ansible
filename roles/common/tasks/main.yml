@@ -41,3 +41,8 @@
     baseurl: http://download.opensuse.org/repositories/home:/kamailio:/v4.4.x-rpms/CentOS_$releasever/
     gpgcheck: no
 
+- name: Install Delta RPMs
+  yum:
+    name: deltarpm
+    state: latest
+
