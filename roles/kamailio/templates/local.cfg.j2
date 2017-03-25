@@ -43,16 +43,16 @@
 {% for host in groups['rabbitmq'] %}
 
 {% if loop.index is equalto 1 %}
-#!substdef "!MY_AMQP_URL!kazoo://guest:guest@{{ hostvars[host]['ansible_default_ipv4']['address'] }}:5672!g"
+#!substdef "!MY_AMQP_URL!kazoo://{{ rabbitmq_user }}:{{ rabbitmq_password  }}@{{ hostvars[host]['ansible_default_ipv4']['address'] }}:5672!g"
 {% endif %}
 
 {% if loop.index is equalto 2 %}
-#!substdef "!MY_AMQP_SECONDARY_URL!kazoo://guest:guest@{{ hostvars[host]['ansible_default_ipv4']['address'] }}:5672!g"
+#!substdef "!MY_AMQP_SECONDARY_URL!kazoo://{{ rabbitmq_user }}:{{ rabbitmq_password }}@{{ hostvars[host]['ansible_default_ipv4']['address'] }}:5672!g"
 
 {% endif %}
 
 {% if loop.index is equalto 3 %}
-#!substdef "!MY_AMQP_TERTIARY_URL!kazoo://guest:guest@{{ hostvars[host]['ansible_default_ipv4']['address'] }}:5672!g"
+#!substdef "!MY_AMQP_TERTIARY_URL!kazoo://{{ rabbitmq_user }}:{{ rabbitmq_password }}@{{ hostvars[host]['ansible_default_ipv4']['address'] }}:5672!g"
 
 {% endif %}
 

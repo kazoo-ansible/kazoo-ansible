@@ -23,6 +23,11 @@
     node: kazoo-rabbitmq
     user: "{{ rabbitmq_user }}"
     password: "{{ rabbitmq_password }}"
+    permissions:
+      - vhost: /
+        configure_priv: .*
+        read_priv: .*
+        write_priv: .*
     state: present
 
 - name: Enable RabbitMQ Main Port

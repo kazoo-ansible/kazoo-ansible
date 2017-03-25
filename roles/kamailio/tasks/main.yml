@@ -1,4 +1,6 @@
 ---
+- include_vars: secrets.yml
+
 - name: Install Kamailio
   yum:
     name: kazoo-kamailio
