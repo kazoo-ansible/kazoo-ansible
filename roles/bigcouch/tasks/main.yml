@@ -10,19 +10,17 @@
     state: started
     enabled: yes
 
-- name: Allow BigCouch Port 5984 from Kazoo
+- name: Allow BigCouch Port 5984
   firewalld:
-    rich_rule: "rule family=\"ipv4\" source address=\"{{ hostvars[item]['ansible_default_ipv4']['address'] }}\" port port=5984 protocol=\"tcp\" accept"
+    port: 5984/tcp
     permanent: true
     immediate: true
     state: enabled
-  with_items: "{{ groups['kazoo'] }}"
 
-- name: Allow Bigcouch Port 5986 from Kazoo
+- name: Allow Bigcouch Port 5986
   firewalld:
-    rich_rule: "rule family=\"ipv4\" source address=\"{{ hostvars[item]['ansible_default_ipv4']['address'] }}\" port port=5986 protocol=\"tcp\" accept"
+    port: 5986/tcp
     permanent: true
     immediate: true
     state: enabled
-  with_items: "{{ groups['kazoo'] }}"
 
