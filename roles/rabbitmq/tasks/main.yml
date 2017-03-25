@@ -10,6 +10,12 @@
     state: started
     enabled: yes
 
+- name: Remove RabbitMQ Guest Account
+  rabbitmq_user:
+    node: kazoo-rabbitmq
+    user: guest
+    state: absent
+
 - name: Enable RabbitMQ Main Port
   firewalld:
     port: 5672/tcp
@@ -23,10 +29,4 @@
     permanent: true
     immediate: true
     state: enabled
-
-- name: Remove RabbitMQ Guest Account
-  rabbitmq_user:
-    node: kazoo-rabbitmq
-    user: guest
-    state: absent
 

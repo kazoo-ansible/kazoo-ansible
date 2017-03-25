@@ -17,3 +17,59 @@
     dest: /etc/kazoo/kamailio/local.cfg
   notify: Restart Kamailio
 
+- name: Allow Kamailio SIP TCP
+  firewalld:
+    port: 5060/tcp
+    permanent: true
+    immediate: true
+    state: enabled
+
+- name: Allow Kamailio SIP UDP
+  firewalld:
+    port: 5060/udp
+    permanent: true
+    immediate: true
+    state: enabled
+
+- name: Allow Kamailio TLS TCP
+  firewalld:
+    port: 5061/tcp
+    permanent: true
+    immediate: true
+    state: enabled
+
+- name: Allow Kamailio TLS UDP
+  firewalld:
+    port: 5061/udp
+    permanent: true
+    immediate: true
+    state: enabled
+
+- name: Allow Kamailio WebRTC TCP
+  firewalld:
+    port: 5064/tcp
+    permanent: true
+    immediate: true
+    state: enabled
+
+- name: Allow Kamailio WebRTC UDP
+  firewalld:
+    port: 5064/tcp
+    permanent: true
+    immediate: true
+    state: enabled
+
+- name: Allow Kamailio WebRTC SSL TCP
+  firewalld:
+    port: 5064/tcp
+    permanent: true
+    immediate: true
+    state: enabled
+
+- name: Allow Kamailio WebRTC SSL UDP
+  firewalld:
+    port: 5064/udp
+    permanent: true
+    immediate: true
+    state: enabled
+

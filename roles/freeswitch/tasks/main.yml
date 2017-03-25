@@ -9,3 +9,39 @@
     name: kazoo-freeswitch
     state: started
     enabled: yes
+
+- name: Allow Freeswitch Event Socket
+  firewalld:
+    port: 8021/tcp
+    permanent: true
+    immediate: true
+    state: enabled
+
+- name: Allow Freeswitch Erlang Socket
+  firewalld:
+    port: 8031/tcp
+    permanent: true
+    immediate: true
+    state: enabled
+
+- name: Allow Freeswitch SIP TCP
+  firewalld:
+    port: 11000/tcp
+    permanent: true
+    immediate: true
+    state: enabled
+
+- name: Allow Freeswitch SIP UDP
+  firewalld:
+    port: 11000/udp
+    permanent: true
+    immediate: true
+    state: enabled
+
+- name: Allow Freeswitch RTP
+  firewalld:
+    port: 16384-32768/udp
+    permanent: true
+    immediate: true
+    state: enabled
+
