@@ -3,9 +3,16 @@
   yum:
     name: kazoo-rabbitmq
     state: latest
+
 - name: Start and Enable RabbitMQ 
   service:
     name: kazoo-rabbitmq
     state: started
     enabled: yes
+
+- name: Remove RabbitMQ Guest Account
+  rabbitmq_user:
+    node: kazoo-rabbitmq
+    user: guest
+    state: absent
 
