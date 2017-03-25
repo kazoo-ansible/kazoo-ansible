@@ -1,4 +1,6 @@
 ---
+- include_vars: secrets.yml
+
 - name: Install RabbitMQ
   yum:
     name: kazoo-rabbitmq
@@ -15,6 +17,13 @@
     node: kazoo-rabbitmq
     user: guest
     state: absent
+
+- name: Add RabbitMQ Account
+  rabbitmq_user:
+    node: kazoo-rabbitmq
+    user: "{{ rabbitmq_user }}"
+    password: "{{ rabbitmq_password }}"
+    state: present
 
 - name: Enable RabbitMQ Main Port
   firewalld:
