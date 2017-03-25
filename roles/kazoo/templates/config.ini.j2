@@ -8,8 +8,8 @@ compact_automatically = true
 cookie = change_me
 ip = "127.0.0.1"
 port = 15984
-; username = "kazoo"
-; password = "supermegaexcellenttelephonyplatform"
+username = "{{ couch_user }}"
+password = "{{ couch_password }}"
 admin_port = 15986
 
 {% for host in groups['kazoo'] %}

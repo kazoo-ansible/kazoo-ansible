@@ -1,4 +1,6 @@
 ---
+- include_vars: secrets.yml
+
 - name: Install BigCouch
   yum:
     name: kazoo-bigcouch
@@ -9,6 +11,13 @@
     name: kazoo-bigcouch
     state: started
     enabled: yes
+
+- name: Create Bigcouch local.ini
+  template:
+    src: local.ini.j2
+    dest: /etc/kazoo/bigcouch/local.ini
+    owner: bigcouch
+  notify: Restart Bigcouch
 
 - name: Allow BigCouch Port 5984
   firewalld:
