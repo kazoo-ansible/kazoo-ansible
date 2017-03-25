@@ -10,6 +10,20 @@
     state: started
     enabled: yes
 
+- name: Enable RabbitMQ Main Port
+  firewalld:
+    port: 5672/tcp
+    permanent: true
+    immediate: true
+    state: enabled
+
+- name: Enable RabbitMQ Management Port
+  firewalld:
+    port: 15672/tcp
+    permanent: true
+    immediate: true
+    state: enabled
+
 - name: Remove RabbitMQ Guest Account
   rabbitmq_user:
     node: kazoo-rabbitmq
