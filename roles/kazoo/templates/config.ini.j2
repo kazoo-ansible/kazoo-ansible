@@ -1,6 +1,6 @@
 {% for host in groups['rabbitmq'] %}
 [amqp]
-uri = "amqp://guest:guest@{{ hostvars[host]['ansible_default_ipv4']['address'] }}:5672"
+uri = "amqp://{{ rabbitmq_user }}:{{ rabbitmq_password }}@{{ hostvars[host]['ansible_default_ipv4']['address'] }}:5672"
 {% endfor %}
 
 [bigcouch]
@@ -24,6 +24,7 @@ cookie = change_me
 [ecallmgr]
 host = {{ hostvars[host]['ansible_nodename'] }}
 cookie = change_me
+
 {% endfor %}
 
 [log]
