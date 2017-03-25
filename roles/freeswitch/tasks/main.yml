@@ -10,13 +10,6 @@
     state: started
     enabled: yes
 
-- name: Allow Freeswitch Event Socket
-  firewalld:
-    port: 8021/tcp
-    permanent: true
-    immediate: true
-    state: enabled
-
 - name: Allow Freeswitch Erlang Socket
   firewalld:
     port: 8031/tcp

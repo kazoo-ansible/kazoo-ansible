@@ -5,7 +5,13 @@
     state: latest
   notify: Restart Kamailio
 
-- name: Start and Enable Kamailio
+- name: Stop and Disable Default Kamailio
+  service:
+    name: kamailio
+    state: stopped
+    enabled: no
+
+- name: Start and Enable Kazoo Kamailio
   service:
     name: kazoo-kamailio
     state: started
