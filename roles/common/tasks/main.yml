@@ -46,3 +46,10 @@
     name: deltarpm
     state: latest
 
+- name: Update Packages
+  yum:
+    name: '*'
+    state: latest
+    exclude:
+      - kazoo*
+

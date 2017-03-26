@@ -1,5 +1,5 @@
 ---
-- name: Restart Bigcouch
+- name: Restart BigCouch
   service:
     name: kazoo-bigcouch
     state: restarted

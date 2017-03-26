@@ -12,12 +12,12 @@
     state: started
     enabled: yes
 
-- name: Set Bigcouch Admin Password Hash Fact
+- name: Set BigCouch Admin Password Hash Fact
   shell: "echo -n {{ couch_password }}salt | sha1sum | awk '{print \"-hashed-\"$1\",salt\"}'"
   register: couch_hash
   changed_when: false
 
-- name: Create Bigcouch local.ini
+- name: Create BigCouch local.ini
   template:
     src: local.ini.j2
     dest: /etc/kazoo/bigcouch/local.ini
@@ -31,7 +31,7 @@
     immediate: true
     state: enabled
 
-- name: Allow Bigcouch Port 5986
+- name: Allow BigCouch Port 5986
   firewalld:
     port: 5986/tcp
     permanent: true

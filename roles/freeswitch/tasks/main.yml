@@ -1,4 +1,6 @@
 ---
+- include_vars: secrets.yml
+
 - name: Install FreeSwitch
   yum:
     name: kazoo-freeswitch
@@ -16,6 +18,12 @@
     state: started
     enabled: yes
 
+- name: Create Kazoo Configuration
+  template:
+    src: kazoo.conf.xml.j2
+    dest: /etc/kazoo/freeswitch/autoload_configs/kazoo.conf.xml
+  notify: Gracefully Restart FreeSwitch
+
 - name: Allow Freeswitch Erlang Socket
   firewalld:
     port: 8031/tcp
@@ -23,21 +31,21 @@
     immediate: true
     state: enabled
 
-- name: Allow Freeswitch SIP TCP
+- name: Allow FreeSwitch SIP TCP
   firewalld:
     port: 11000/tcp
     permanent: true
     immediate: true
     state: enabled
 
-- name: Allow Freeswitch SIP UDP
+- name: Allow FreeSwitch SIP UDP
   firewalld:
     port: 11000/udp
     permanent: true
     immediate: true
     state: enabled
 
-- name: Allow Freeswitch RTP
+- name: Allow FreeSwitch RTP
   firewalld:
     port: 16384-32768/udp
     permanent: true
