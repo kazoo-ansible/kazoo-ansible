@@ -24,6 +24,13 @@
     owner: bigcouch
   notify: Restart BigCouch
 
+- name: Create BigCouch vm.args
+  template:
+    src: vm.args.j2
+    dest: /etc/kazoo/bigcouch/vm.args
+    owner: bigcouch
+  notify: Restart BigCouch
+
 - name: Allow BigCouch Port 5984
   firewalld:
     port: 5984/tcp

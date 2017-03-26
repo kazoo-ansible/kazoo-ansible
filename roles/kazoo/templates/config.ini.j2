@@ -5,7 +5,7 @@ uri = "amqp://{{ rabbitmq_user }}:{{ rabbitmq_password }}@{{ hostvars[host]['ans
 
 [bigcouch]
 compact_automatically = true
-cookie = change_me
+cookie = {{ erlang_cookie }}
 ip = "127.0.0.1"
 port = 15984
 username = "{{ couch_user }}"
@@ -15,15 +15,15 @@ admin_port = 15986
 {% for host in groups['kazoo'] %}
 [whistle_apps]
 host = {{ hostvars[host]['ansible_nodename'] }}
-cookie = change_me
+cookie = {{ erlang_cookie }}
 
 [kazoo_apps]
 host = {{ hostvars[host]['ansible_nodename'] }}
-cookie = change_me
+cookie = {{ erlang_cookie }}
 
 [ecallmgr]
 host = {{ hostvars[host]['ansible_nodename'] }}
-cookie = change_me
+cookie = {{ erlang_cookie }}
 
 {% endfor %}
 
