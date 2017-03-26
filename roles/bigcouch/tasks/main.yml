@@ -22,7 +22,7 @@
     src: local.ini.j2
     dest: /etc/kazoo/bigcouch/local.ini
     owner: bigcouch
-  notify: Restart Bigcouch
+  notify: Restart BigCouch
 
 - name: Allow BigCouch Port 5984
   firewalld:
