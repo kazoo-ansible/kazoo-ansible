@@ -80,6 +80,13 @@
     name: monster-ui*
     state: latest
 
+- name: Allow Http Port
+  firewalld:
+    port: 80/tcp
+    permanent: true
+    immediate: true
+    state: enabled
+
 - name: Create MonsterUI config.js
   template:
     src: config.js.j2
