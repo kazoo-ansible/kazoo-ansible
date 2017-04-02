@@ -13,17 +13,17 @@
     state: stopped
     enabled: no
 
-- name: Start and Enable Kazoo Kamailio
-  service:
-    name: kazoo-kamailio
-    state: started
-    enabled: yes
-
 - name: Create Kamailio local.cfg
   template:
     src: local.cfg.j2
     dest: /etc/kazoo/kamailio/local.cfg
   notify: Restart Kamailio
+
+- name: Start and Enable Kazoo Kamailio
+  service:
+    name: kazoo-kamailio
+    state: started
+    enabled: yes
 
 - name: Allow Kamailio SIP TCP
   firewalld:

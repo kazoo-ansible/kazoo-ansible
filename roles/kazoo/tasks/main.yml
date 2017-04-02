@@ -6,17 +6,17 @@
     name: kazoo-haproxy
     state: latest
 
-- name: Start and Enable HAProxy
-  service:
-    name: kazoo-haproxy
-    state: started
-    enabled: yes
-
 - name: Create HAProxy haproxy.cfg
   template:
     src: haproxy.cfg.j2
     dest: /etc/kazoo/haproxy/haproxy.cfg
   notify: Restart HAProxy
+
+- name: Start and Enable HAProxy
+  service:
+    name: kazoo-haproxy
+    state: started
+    enabled: yes
 
 - name: Install Kazoo
   yum:
@@ -25,6 +25,12 @@
   with_items:
    - kazoo-applications
    - kazoo-application-*
+
+- name: Create Kazoo config.ini
+  template:
+    src: config.ini.j2
+    dest: /etc/kazoo/core/config.ini
+  notify: Restart Kazoo
 
 - name: Start and Enable Kazoo Applications
   service:
@@ -38,11 +44,6 @@
     state: started
     enabled: yes
 
-- name: Create Kazoo config.ini
-  template:
-    src: config.ini.j2
-    dest: /etc/kazoo/core/config.ini
-  notify: Restart Kazoo
 
 - name: Allow epmd Port
   firewalld:
@@ -63,17 +64,17 @@
     name: nginx
     state: latest
 
-- name: Start and Enable Nginx
-  service:
-    name: nginx
-    state: started
-    enabled: yes
-
 - name: Create nginx.conf
   template:
     src: nginx.conf.j2
     dest: /etc/nginx/nginx.conf
   notify: Restart Nginx
+
+- name: Start and Enable Nginx
+  service:
+    name: nginx
+    state: started
+    enabled: yes
 
 - name: Install MonsterUI
   yum:

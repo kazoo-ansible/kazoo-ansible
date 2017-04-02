@@ -6,12 +6,6 @@
     name: kazoo-bigcouch
     state: latest
 
-- name: Start and Enable BigCouch
-  service:
-    name: kazoo-bigcouch
-    state: started
-    enabled: yes
-
 - name: Set BigCouch Admin Password Hash Fact
   shell: "echo -n {{ couch_password }}salt | sha1sum | awk '{print \"-hashed-\"$1\",salt\"}'"
   register: couch_hash
@@ -23,6 +17,12 @@
     dest: /etc/kazoo/bigcouch/local.ini
     owner: bigcouch
   notify: Restart BigCouch
+
+- name: Start and Enable BigCouch
+  service:
+    name: kazoo-bigcouch
+    state: started
+    enabled: yes
 
 - name: Create BigCouch vm.args
   template:

@@ -12,17 +12,17 @@
     state: stopped
     enabled: no
 
-- name: Start and Enable FreeSwitch
-  service:
-    name: kazoo-freeswitch
-    state: started
-    enabled: yes
-
 - name: Create Kazoo Configuration
   template:
     src: kazoo.conf.xml.j2
     dest: /etc/kazoo/freeswitch/autoload_configs/kazoo.conf.xml
   notify: Gracefully Restart FreeSwitch
+
+- name: Start and Enable FreeSwitch
+  service:
+    name: kazoo-freeswitch
+    state: started
+    enabled: yes
 
 - name: Allow Freeswitch Erlang Socket
   firewalld:
