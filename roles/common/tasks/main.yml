@@ -1,3 +1,4 @@
+---
 - name: Set System Time to UTC
   timezone:
     name: UTC
@@ -34,22 +35,25 @@
     baseurl: http://files.freeswitch.org/yum-1.6/$releasever/$basearch
     gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-FREESWITCH
 
+- name: Install Kamailio GPG Key
+  copy:
+    src: RPM-GPG-KEY-KAMAILIO
+    dest: /etc/pki/rpm-gpg
+
 - name: Install Kamailio Repository
   yum_repository:
     name: kamailio
     description: Kamailio Repository
-    baseurl: http://download.opensuse.org/repositories/home:/kamailio:/v4.4.x-rpms/CentOS_$releasever/
-    gpgcheck: no
+    baseurl: http://download.opensuse.org/repositories/home:/kamailio:/v4.4.x-rpms/CentOS_$releasever
+    gpgkey: file://etc/pki/rpm-gpg/RPM-GPG-KEY-KAMAILIO
 
 - name: Install Delta RPMs
   yum:
     name: deltarpm
     state: latest
 
-- name: Update Packages
+- name: Install Yum Utils
   yum:
-    name: '*'
+    name: yum-utils
     state: latest
-    exclude:
-      - kazoo*
 

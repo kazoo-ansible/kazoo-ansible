@@ -29,3 +29,8 @@
   roles:
    - role: kazoo
 
+- hosts: all
+  become: true
+  roles:
+   - role: updates
+
