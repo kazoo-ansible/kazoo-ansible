@@ -8,7 +8,7 @@
   shell: needs-restarting -r
   register: needs_restarting
   failed_when: needs_restarting.rc not in [0,1]
-  changed_when: false
+  changed_when: needs_restarting.rc == 1
 
 - name: Reboot
   shell: ( sleep 3 && reboot & )
