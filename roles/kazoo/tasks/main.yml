@@ -44,7 +44,6 @@
     state: started
     enabled: yes
 
-
 - name: Allow epmd Port
   firewalld:
     port: 4369/tcp
@@ -87,6 +86,10 @@
     permanent: true
     immediate: true
     state: enabled
+
+- name: Allow Httpd to Connect to the Network
+  shell: setsebool -P httpd_can_network_connect 1
+  changed_when: false
 
 - name: Create MonsterUI config.js
   template:
