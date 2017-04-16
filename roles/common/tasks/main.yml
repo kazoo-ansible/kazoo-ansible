@@ -44,8 +44,8 @@
   yum_repository:
     name: kamailio
     description: Kamailio Repository
-    baseurl: http://download.opensuse.org/repositories/home:/kamailio:/v4.4.x-rpms/CentOS_$releasever
-    gpgkey: file://etc/pki/rpm-gpg/RPM-GPG-KEY-KAMAILIO
+    baseurl: http://download.opensuse.org/repositories/home:/lazedo:/branches:/home:/kamailio:/v4.4.x-rpms/CentOS_$releasever
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-KAMAILIO
 
 - name: Install Delta RPMs
   yum:
