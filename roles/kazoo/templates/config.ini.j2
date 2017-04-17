@@ -1,6 +1,6 @@
 {% for host in groups['rabbitmq'] %}
 [amqp]
-uri = "amqp://{{ rabbitmq_user }}:{{ rabbitmq_password }}@{{ hostvars[host]['ansible_default_ipv4']['address'] }}:5672"
+uri = "amqp://{{ rabbitmq_user }}:{{ rabbitmq_password }}@{{ hostvars[host]['ansible_nodename'] }}:5672"
 {% endfor %}
 
 [bigcouch]
