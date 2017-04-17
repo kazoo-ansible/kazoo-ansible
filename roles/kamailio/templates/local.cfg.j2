@@ -28,7 +28,7 @@
 ## SERVER INFORMATION
 ################################################################################
 ## CHANGE "kamailio.2600hz.com" TO YOUR SERVERS HOSTNAME
-#!substdef "!MY_HOSTNAME!{{ ansible_hostname }}!g"
+#!substdef "!MY_HOSTNAME!{{ hostvars[inventory_hostname]['ansible_nodename'] }}!g"
 
 ## CHANGE "127.0.0.1" TO YOUR SERVERS IP ADDRESS
 ##     Usually your public IP.  If you need
