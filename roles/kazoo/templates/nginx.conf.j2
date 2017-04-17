@@ -40,7 +40,9 @@ http {
         listen       [::]:80 default_server;
         server_name  _;
         root         /var/www/html/monster-ui;
-
+        
+        client_max_body_size 10M;
+        
         # Load configuration files for the default server block.
         include /etc/nginx/default.d/*.conf;
 

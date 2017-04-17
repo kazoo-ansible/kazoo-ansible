@@ -19,6 +19,12 @@
     dest: /etc/kazoo/kamailio/local.cfg
   notify: Restart Kamailio
 
+- name: Create Kamailio Dispatcher
+  template:
+    src: dispatcher.j2
+    dest: /etc/kazoo/kamailio/dbtext/dispatcher
+  notify: Restart Kamailio
+
 - name: Start and Enable Kazoo Kamailio
   service:
     name: kazoo-kamailio
