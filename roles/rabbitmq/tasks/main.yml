@@ -6,29 +6,17 @@
     name: kazoo-rabbitmq
     state: latest
 
+- name: Create RabbitMQ Configuration
+  template:
+    src: rabbitmq.config.j2
+    dest: /etc/kazoo/rabbitmq/rabbitmq.config
+  notify: Restart Rabbitmq
+
 - name: Start and Enable RabbitMQ 
   service:
     name: kazoo-rabbitmq
     state: started
     enabled: yes
-
-- name: Remove RabbitMQ Guest Account
-  rabbitmq_user:
-    node: kazoo-rabbitmq
-    user: guest
-    state: absent
-
-- name: Add RabbitMQ Account
-  rabbitmq_user:
-    node: kazoo-rabbitmq
-    user: "{{ rabbitmq_user }}"
-    password: "{{ rabbitmq_password }}"
-    permissions:
-      - vhost: /
-        configure_priv: .*
-        read_priv: .*
-        write_priv: .*
-    state: present
 
 - name: Enable RabbitMQ Main Port
   firewalld:
