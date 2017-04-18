@@ -24,6 +24,20 @@
     state: started
     enabled: yes
 
+- name: Allow Freeswitch Event Socket TCP
+  firewalld:
+    port: 8021/tcp
+    permanent: true
+    immediate: true
+    state: enabled
+
+- name: Allow Freeswitch Event Socket UDP
+  firewalld:
+    port: 8021/udp
+    permanent: true
+    immediate: true
+    state: enabled
+
 - name: Allow Freeswitch Erlang Socket TCP
   firewalld:
     port: 8031/tcp
@@ -48,6 +62,13 @@
 - name: Allow Distributed Erlang Ports
   firewalld:
     port: 11500-11999/tcp
+    permanent: true
+    immediate: true
+    state: enabled
+
+- name: Allow Ephemeral Ports for ecallmgr
+  firewalld:
+    port: 32768-60999/tcp
     permanent: true
     immediate: true
     state: enabled
