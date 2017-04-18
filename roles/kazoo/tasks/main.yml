@@ -1,23 +1,6 @@
 ---
 - include_vars: secrets.yml
 
-- name: Install HAProxy
-  yum:
-    name: kazoo-haproxy
-    state: latest
-
-- name: Create HAProxy haproxy.cfg
-  template:
-    src: haproxy.cfg.j2
-    dest: /etc/kazoo/haproxy/haproxy.cfg
-  notify: Restart HAProxy
-
-- name: Start and Enable HAProxy
-  service:
-    name: kazoo-haproxy
-    state: started
-    enabled: yes
-
 - name: Install Kazoo
   yum:
     name: "{{ item }}"

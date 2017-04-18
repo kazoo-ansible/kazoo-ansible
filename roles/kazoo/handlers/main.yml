@@ -1,9 +1,4 @@
 ---
-- name: Restart HAProxy
-  service:
-    name: kazoo-haproxy
-    state: restarted
-
 - name: Restart Kazoo
   service:
     name: "{{ item }}"
