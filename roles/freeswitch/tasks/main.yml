@@ -24,9 +24,30 @@
     state: started
     enabled: yes
 
-- name: Allow Freeswitch Erlang Socket
+- name: Allow Freeswitch Erlang Socket TCP
   firewalld:
     port: 8031/tcp
+    permanent: true
+    immediate: true
+    state: enabled
+
+- name: Allow Freeswitch Erlang Socket UDP
+  firewalld:
+    port: 8031/udp
+    permanent: true
+    immediate: true
+    state: enabled
+
+- name: Allow epmd Port
+  firewalld:
+    port: 4369/tcp
+    permanent: true
+    immediate: true
+    state: enabled
+
+- name: Allow Distributed Erlang Ports
+  firewalld:
+    port: 11500-11999/tcp
     permanent: true
     immediate: true
     state: enabled
