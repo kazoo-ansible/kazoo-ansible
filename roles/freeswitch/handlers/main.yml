@@ -1,4 +1,4 @@
 ---
 - name: Gracefully Restart FreeSwitch
-  shell: "fs_cli -x 'fsctl shutdown elegant restart'"
+  shell: "fs_cli -x 'fsctl shutdown asap restart'"
 
