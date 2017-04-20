@@ -3,18 +3,6 @@
   timezone:
     name: UTC
 
-- name: Install EPEL GPG
-  copy:
-    src: RPM_GPG_KEY-EPEL-7
-    dest: /etc/pki/rpm-gpg
-
-- name: Install EPEL Repo
-  yum_repository:
-    name: epel
-    description: Extra Packages for Enterprise Linux (EPEL) Repo
-    baseurl: https://download.fedoraproject.org/pub/epel/$releasever/$basearch
-    gpgkey: file:///etc/pki/rpm-gpg/RPM_GPG_KEY-EPEL-7
-
 - name: Install 2600hz Stable Repo
   yum_repository:
     name: 2600hz-stable
@@ -22,30 +10,6 @@
     baseurl: https://packages.2600hz.com/centos/$releasever/stable
     gpgcheck: no
     sslverify: no
-
-- name: Install FreeSwitch GPG
-  copy:
-    src: RPM-GPG-KEY-FREESWITCH
-    dest: /etc/pki/rpm-gpg
-
-- name: Install FreeSwitch Repository
-  yum_repository:
-    name: freeswitch
-    description: FreeSwitch Repository
-    baseurl: http://files.freeswitch.org/yum-1.6/$releasever/$basearch
-    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-FREESWITCH
-
-- name: Install Kamailio GPG Key
-  copy:
-    src: RPM-GPG-KEY-KAMAILIO
-    dest: /etc/pki/rpm-gpg
-
-- name: Install Kamailio Repository
-  yum_repository:
-    name: kamailio
-    description: Kamailio Repository
-    baseurl: http://download.opensuse.org/repositories/home:/lazedo:/branches:/home:/kamailio:/v4.4.x-rpms/CentOS_$releasever
-    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-KAMAILIO
 
 - name: Install Delta RPMs
   yum:
