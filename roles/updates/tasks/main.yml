@@ -9,18 +9,7 @@
   register: needs_restarting
   failed_when: needs_restarting.rc not in [0,1]
   changed_when: needs_restarting.rc == 1
-
-- name: Reboot
-  shell: ( sleep 3 && reboot & )
-  when: needs_restarting.rc == 1
-
-- name: Wait for Reboot
-  local_action:
-    module: wait_for
-      host="{{inventory_hostname}}"
-      state=started
-      delay=30
-      timeout=300
-  become: false
-  when: needs_restarting.rc == 1
+  notify:
+    - Reboot
+    - Wait for Reboot
 
