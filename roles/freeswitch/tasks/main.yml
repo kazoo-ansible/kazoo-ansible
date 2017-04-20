@@ -18,10 +18,16 @@
     dest: /etc/kazoo/freeswitch/autoload_configs/kazoo.conf.xml
   notify: Gracefully Restart FreeSwitch
 
+- name: Create Freeswitch Service
+  copy:
+    src: files/kazoo-freeswitch.service
+    dest: /lib/systemd/system/kazoo-freeswitch.service
+
 - name: Start and Enable FreeSwitch
   service:
     name: kazoo-freeswitch
     state: started
+    daemon_reload: yes
     enabled: yes
 
 - name: Allow Freeswitch Erlang Socket TCP
