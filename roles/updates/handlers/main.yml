@@ -1,6 +1,8 @@
 ---
 - name: Reboot
-  command: reboot && sleep 1
+  async: 1
+  poll: 0
+  shell: sleep 2 && /sbin/reboot
 
 - name: Wait for Reboot
   become: no
