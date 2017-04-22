@@ -28,7 +28,7 @@ def main():
     
     current_nodes = [urlparse(doc['key']).netloc for doc in docs['rows']]
     
-    new_nodes = [host for host in couchdb_group if host in current_nodes]
+    new_nodes = [host for host in couchdb_group if not host in current_nodes]
 
     if not new_nodes:
         module.exit_json(changed=False)
