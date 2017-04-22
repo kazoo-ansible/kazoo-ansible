@@ -59,3 +59,7 @@
     immediate: true
     state: enabled
 
+- name: Cluster BigCouch
+  couchcluster:
+      couchdb_group: "{{ groups['bigcouch'] }}"
+
