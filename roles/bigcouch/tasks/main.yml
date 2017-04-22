@@ -61,5 +61,5 @@
 
 - name: Cluster BigCouch
   couchcluster:
-      couchdb_group: "{{ groups['bigcouch'] }}"
+      node_1: "{{ groups['bigcouch'][0] }}"
 

@@ -3,22 +3,18 @@
 from ansible.module_utils.basic import *
 from ansible.module_utils.urls import *
 import json
-from urlparse import urlparse
+import socket
 
 def main():
     module = AnsibleModule(
         argument_spec = dict(
-            couchdb_group=dict(required=True, type='list')
+            node_1=dict(required=True, type='str')
         ),
         supports_check_mode=True
     )
 
-    couchdb_group = module.params['couchdb_group']
-    
-    if not couchdb_group:
-        module.fail_json(msg='No hosts specified in supplied couchdb_group.')
-    
-    node_1 = couchdb_group[0]
+    node_1 = module.params['node_1']
+    current_node = 'bigcouch@' + socket.gethostname()
 
     try:
         response = open_url('http://' + node_1 + ':5986/nodes/_all_docs')
@@ -26,22 +22,19 @@ def main():
     except Exception as ex:
         module.fail_json(msg=str(ex))
     
-    current_nodes = [urlparse(doc['key']).netloc for doc in docs['rows']]
-    
-    new_nodes = [host for host in couchdb_group if not host in current_nodes]
+    nodes = [doc['key'] for doc in docs['rows']]
 
-    if not new_nodes:
+    if current_node in nodes:
         module.exit_json(changed=False)
 
     if module.check_mode:
         module.exit_json(changed=True)
-
-    for node in new_nodes:
-        try:
-            response = open_url('http://' + node_1 + ':5986/nodes', method='POST', \
-                    headers={'Content-Type':'application/json'}, data=json.dumps({}))
-        except Exception as ex:
-            module.fail_json(msg=str(ex))
+    
+    try:
+        response = open_url('http://' + node_1 + ':5986/nodes/bigcouch@' + node, method='PUT', \
+                headers={'Content-Type':'application/json'}, data=json.dumps({}))
+    except Exception as ex:
+        module.fail_json(msg=str(ex))
 
     module.exit_json(changed=True)
 
