@@ -79,3 +79,8 @@
     src: config.js.j2
     dest: /var/www/html/monster-ui/js/config.js
 
+- name: Cluster Freeswitch
+  freeswithcluster:
+    erlang_cookie: "{{ erlang_cookie }}"
+    freeswitch_hosts: "{{ groups['freeswitch'] }}"
+
