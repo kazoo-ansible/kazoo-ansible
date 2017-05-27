@@ -10,6 +10,7 @@
   shell: "echo -n {{ couch_password }}salt | sha1sum | awk '{print \"-hashed-\"$1\",salt\"}'"
   register: couch_hash
   changed_when: false
+  check_mode: no
 
 - name: Create BigCouch local.ini
   template:
