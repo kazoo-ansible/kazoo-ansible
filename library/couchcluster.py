@@ -31,7 +31,7 @@ def main():
         module.exit_json(changed=True)
     
     try:
-        response = open_url('http://' + node_1 + ':5986/nodes/bigcouch@' + node, method='PUT', \
+        response = open_url('http://' + node_1 + ':5986/nodes/' + current_node, method='PUT', \
                 headers={'Content-Type':'application/json'}, data=json.dumps({}))
     except Exception as ex:
         module.fail_json(msg=str(ex))

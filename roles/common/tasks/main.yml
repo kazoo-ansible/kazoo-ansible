@@ -4,17 +4,9 @@
     name: UTC
 
 - name: Install 2600hz Stable Repo
-  yum_repository:
-    name: 2600hz-stable
-    description: 2600hz Stable Repository
-    baseurl: https://packages.2600hz.com/centos/$releasever/stable
-    gpgcheck: no
-    sslverify: no
-
-- name: Install EPEL
   yum:
-    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-    state: present
+    name: https://packages.2600hz.com/centos/7/stable/2600hz-release/4.0/2600hz-release-4.0-3.el7.centos.noarch.rpm
+    state: installed
 
 - name: Install Delta RPMs
   yum:
