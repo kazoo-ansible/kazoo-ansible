@@ -84,3 +84,7 @@
     erlang_cookie: "{{ erlang_cookie }}"
     freeswitch_hosts: "{{ groups['freeswitch'] }}"
 
+- name: Cluster Kamailio
+  kamailiocluster:
+    erlang_cookie: "{{ erlang_cookie }}"
+    kamailio_ips: "{{ groups['kamailio'] | map('extract', hostvars, ['ansible_default_ipv4', 'address']) | join(',') }}"
