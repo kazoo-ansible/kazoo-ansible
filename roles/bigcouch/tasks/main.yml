@@ -5,6 +5,7 @@
   yum:
     name: kazoo-bigcouch
     state: latest
+  notify: Restart BigCouch
 
 - name: Set BigCouch Admin Password Hash Fact
   shell: "echo -n {{ couch_password }}salt | sha1sum | awk '{print \"-hashed-\"$1\",salt\"}'"

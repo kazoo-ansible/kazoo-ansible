@@ -8,6 +8,7 @@
   with_items:
    - kazoo-applications
    - kazoo-application-*
+  notify: Restart Kazoo
 
 - name: Create Kazoo config.ini
   template:

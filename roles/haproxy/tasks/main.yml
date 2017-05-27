@@ -5,6 +5,7 @@
   yum:
     name: kazoo-haproxy
     state: latest
+  notify: Restart HAProxy
 
 - name: Create HAProxy haproxy.cfg
   template:
