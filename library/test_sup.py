@@ -75,3 +75,27 @@ class TestSup:
 
         process.call_process.assert_called_with(['sup', '-c', 'cookie', '-n', 'ecallmgr', 'ecallmgr_maintenance', 'remove_acl', '192.168.1.1'])
 
+    def test_get_fs_nodes_returns_fs_nodes(self, process):
+        process.call_process.side_effect = [(0, 'freeswitch@kazoo.lan\nfreeswitch@kazoo2.lan', '')]
+
+        fs_nodes = sup.get_fs_nodes('cookie')
+
+        assert fs_nodes == ['kazoo.lan', 'kazoo2.lan']
+
+    def test_add_fs_node_adds_fs_node(self, process):
+        process.call_process.side_effect = [(0, 'ok', '')]
+
+        sup.add_fs_node('cookie', 'freeswitch@kazoo.lan')
+
+        process.call_process.assert_called_with(['sup', '-c', 'cookie', '-n', 'ecallmgr', 'ecallmgr_maintenance', 'add_fs_node', 'freeswitch@kazoo.lan'])
+
+    def test_add_fs_node_handles_duplicates(self, process):
+        process.call_process.side_effect = [(1, '{error,node_exists}\n', '')]
+
+        sup.add_fs_node('cookie', 'freeswitch@kazoo.lan')
+
+    def test_remove_fs_node_removes_fs_node(self, process):
+        process.call_process.side_effect = [(0, 'ok\n', '')]
+
+        sup.remove_fs_node('cookie', 'freeswitch@kazoo.lan')
+
