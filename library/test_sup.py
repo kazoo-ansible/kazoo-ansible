@@ -3,13 +3,6 @@ import sup
 import subprocess
 from unittest import TestCase
 from unittest.mock import Mock
-
-out = """+--------------------------------+-------------------+---------------+-------+------------------+----------------------------------+
-        | Name                           | CIDR               | List          | Type  | Authorizing Type | ID                               |
-        +================================+===================+===============+=======+==================+==================================+
-        | 192.168.1.153                  | 192.168.1.153/32   | authoritative | allow | system_config    |                                  |
-        +--------------------------------+-------------------+---------------+-------+------------------+----------------------------------+"""
-
 @pytest.fixture
 def process():
     sup.process = Mock(spec=sup.process)
@@ -27,6 +20,12 @@ class TestProcess:
 
 class TestSup:
     def test_get_sbc_acls_returns_acl_ips(self, process):
+        out = """+--------------------------------+-------------------+---------------+-------+------------------+----------------------------------+
+        | Name                           | CIDR               | List          | Type  | Authorizing Type | ID                               |
+        +================================+===================+===============+=======+==================+==================================+
+        | 192.168.1.153                  | 192.168.1.153/32   | authoritative | allow | system_config    |                                  |
+        +--------------------------------+-------------------+---------------+-------+------------------+----------------------------------+"""
+
         process.call_process.side_effect = [(0, out, '')]
 
         acls = sup.get_sbc_acls('cookie')
@@ -62,4 +61,17 @@ class TestSup:
         sup.add_sbc_acl('cookie', '192.168.1.153')
 
         process.call_process.assert_called_once_with(['sup', '-c', 'cookie', '-n', 'ecallmgr', 'ecallmgr_maintenance', 'allow_sbc', '192.168.1.153', '192.168.1.153'])
+
+    def test_remove_sbc_acl_removes_sbc_acl(self, process):
+        out = """+--------------------------------+-------------------+---------------+-------+------------------+----------------------------------+
+        | Name                           | CIDR               | List          | Type  | Authorizing Type | ID                               |
+        +================================+===================+===============+=======+==================+==================================+
+        | 192.168.1.1                    | 192.168.1.1/32     | authoritative | allow | system_config    |                                  |
+        +--------------------------------+-------------------+---------------+-------+------------------+----------------------------------+"""
+        
+        process.call_process.side_effect = [(0, out, ''), (0, '', '')]
+
+        sup.remove_sbc_acl('cookie', '192.168.1.1')
+
+        process.call_process.assert_called_with(['sup', '-c', 'cookie', '-n', 'ecallmgr', 'ecallmgr_maintenance', 'remove_acl', '192.168.1.1'])
 

@@ -27,6 +27,14 @@ def get_sbc_acls(cookie):
 def add_sbc_acl(cookie, ip):
     _sup(cookie, ['allow_sbc', ip, ip])
 
+def remove_sbc_acl(cookie, ip):
+    exit_code, stdout, stderr = _sup(cookie, ['sbc_acls', 'acl_summary'])
+
+    matches = [match for match in re.findall(regex, stdout) if match[1] == ip]
+
+    for match in matches:
+        _sup(cookie, ['remove_acl', match[0]])
+
 def _sup(cookie, args):
     cmd = ['sup', '-c', cookie, '-n', 'ecallmgr', 'ecallmgr_maintenance']
     cmd.extend(args)

@@ -18,3 +18,8 @@
     name: yum-utils
     state: latest
 
+- name: Install Sup Python Library
+  copy:
+    src: library/sup.py
+    dest: /usr/lib64/python2.7/sup.py
+

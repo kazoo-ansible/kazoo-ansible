@@ -4,6 +4,7 @@ from ansible.module_utils.basic import *
 from ansible.module_utils.urls import *
 from subprocess import Popen, PIPE, STDOUT
 import re
+import sup
 
 def main():
     module = AnsibleModule(
@@ -17,30 +18,31 @@ def main():
     # Matches Name  |  IP
     regex = re.compile(r'(\S+)\s*?\|\s*?(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\/\d+', re.MULTILINE)
 
+    cookie = module.params['erlang_cookie']
 
-    p = Popen(['sup', '-c', 'cookie', '-n', 'ecallmgr', 'ecallmgr_maintenance', 'sbc_acls',\
-            'acl_summary'], stdout=PIPE, stderr=PIPE)
-    out, error = p.communicate()
+    try:
+        existing_ips = sup.get_sbc_acls(cookie)
+        kamailio_ips = module.params['kamailio_ips']
 
-    if p.returncode:
-        module.fail_json(msg=error)
+        new_ips = [ip for ip in kamailio_ips if ip not in existing_ips]
+        extra_ips = [ip for ip in existing_ips if ip not in kamailio_ips]
 
-    existing_ips = [match[1] for match in re.findall(regex, out)]
-    kamailio_ips = module.params['kamailio_ips']
+        changed = len(new_ips) + len(extra_ips) != 0
 
-    new_ips = [ip for ip in kamailio_ips if ip not in existing_ips]
+        if module.check_mode:
+            module.exit_json(changed=changed)
 
-    if module.check_mode:
-        module.exit_json(changed=len(new_ips) != 0)
+        for ip in extra_ips:
+            sup.remove_sbc_acl(cookie, ip)
 
-    for ip in new_ips:
-        p = Popen(['sup', '-c', 'cookie', '-n', 'ecallmgr', 'ecallmgr_maintenance', 'allow_sbc',\
-                ip, ip], stdout=PIPE, stderr=PIPE)
-        out, error = p.communicate()
+        for ip in new_ips:
+            sup.add_sbc_acl(cookie, ip)
 
-        if p.returncode:
-            module.fail_json(msg=error)
+        module.exit_json(changed=changed)
 
+    except IOError as error:
+        module.fail_json(msg=error.value)
+    
     module.exit_json(changed=len(new_ips) != 0)
 
 if __name__ == '__main__':
