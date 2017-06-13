@@ -2,7 +2,7 @@
 
 from ansible.module_utils.basic import *
 from ansible.module_utils.urls import *
-from subprocess import Popen, PIPE, STDOUT
+import sup
 
 def main():
     module = AnsibleModule(
@@ -13,32 +13,30 @@ def main():
         supports_check_mode=True
     )
 
-    p = Popen(['sup', '-c', 'cookie', '-n', 'ecallmgr', 'ecallmgr_maintenance', 'list_fs_nodes'],\
-            stdout=PIPE, stderr=PIPE)
-    out, error = p.communicate()
-
-    if p.returncode:
-        module.fail_json(msg=error)
-
-    existing_hosts = [line.replace('freeswitch@', '') for line in out.splitlines()]
-
+    erlang_cookie = module.params['erlang_cookie']
     freeswitch_hosts = module.params['freeswitch_hosts']
 
-    new_hosts = [host for host in freeswitch_hosts if host not in existing_hosts]
+    try:
+        existing_hosts = sup.get_fs_nodes(erlang_cookie)
 
-    if module.check_mode:
-        module.exit_json(changed=len(new_hosts) != 0)
+        new_hosts = [host for host in freeswitch_hosts if host not in existing_hosts]
+        extra_hosts = [host for host in existing_hosts if host not in freeswitch_hosts]
 
-    for host in new_hosts:
-        p = Popen(['sup', '-c', 'cookie', '-n', 'ecallmgr', 'ecallmgr_maintenance', 'add_fs_node',\
-                'freeswitch@' + host], stdout=PIPE, stderr=PIPE)
-        out, error = p.communicate()
+        changed = len(new_hosts) + len(extra_hosts) != 0
 
-        if p.returncode:
-            if error != '{error,node_exists}':
-                module.fail_json(msg=error)
+        if module.check_mode:
+            module.exit_json(changed=changed)
 
-    module.exit_json(changed=len(new_hosts) != 0)
+        for host in new_hosts:
+            sup.add_fs_node(erlang_cookie, host)
+
+        for host in extra_hosts:
+            sup.remove_fs_node(erlang_cookie, host)
+
+        module.exit_json(changed=changed)
+
+    except IOError as error:
+        module.fail_json(msg=error)
 
 if __name__ == '__main__':
     main()

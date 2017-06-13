@@ -44,13 +44,13 @@ def get_fs_nodes(cookie):
 
 def add_fs_node(cookie, fs_node):
     try:
-        _sup(cookie, ['add_fs_node', fs_node])
+        _sup(cookie, ['add_fs_node', 'freeswitch@' + fs_node])
     except IOError as err:
         if '{error,node_exists}' not in str(err):
             raise err
 
 def remove_fs_node(cookie, fs_node):
-    _sup(cookie, ['remove_fs_node', fs_node])
+    _sup(cookie, ['remove_fs_node', 'freeswitch@' + fs_node])
 
 def _sup(cookie, args):
     cmd = ['sup', '-c', cookie, '-n', 'ecallmgr', 'ecallmgr_maintenance']

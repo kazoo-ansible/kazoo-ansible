@@ -43,8 +43,6 @@ def main():
     except IOError as error:
         module.fail_json(msg=error.value)
     
-    module.exit_json(changed=len(new_ips) != 0)
-
 if __name__ == '__main__':
     main()
 
