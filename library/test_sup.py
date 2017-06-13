@@ -54,3 +54,12 @@ class TestSup:
             sup.get_sbc_acls('cookie')
             assert 'stderr' in str(err.value)
 
+    def test_add_sbc_acl_adds_sbc_acl(self, process):
+        out = """updating authoritative ACLs 192.168.1.153(192.168.1.153/32) to allow traffic
+        issued reload ACLs to freeswitch@kazoo.lan"""
+        process.call_process.side_effect = [(0, out, '')]
+
+        sup.add_sbc_acl('cookie', '192.168.1.153')
+
+        process.call_process.assert_called_once_with(['sup', '-c', 'cookie', '-n', 'ecallmgr', 'ecallmgr_maintenance', 'allow_sbc', '192.168.1.153', '192.168.1.153'])
+

@@ -18,12 +18,23 @@ process = Process()
 regex = re.compile(r'(\S+)\s*?\|\s*?(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\/\d+', re.MULTILINE)
 
 def get_sbc_acls(cookie):
-    exit_code, stdout, stderr = process.call_process(['sup', '-c', cookie, '-n', 'ecallmgr', 'ecallmgr_maintenance', 'sbc_acls', 'acl_summary'])
-
-    if exit_code:
-        raise IOError(stderr)
+    exit_code, stdout, stderr = _sup(cookie, ['sbc_acls', 'acl_summary'])
 
     ips = [match[1] for match in re.findall(regex, stdout)]
 
     return ips
+
+def add_sbc_acl(cookie, ip):
+    _sup(cookie, ['allow_sbc', ip, ip])
+
+def _sup(cookie, args):
+    cmd = ['sup', '-c', cookie, '-n', 'ecallmgr', 'ecallmgr_maintenance']
+    cmd.extend(args)
+
+    exit_code, stdout, stderr = process.call_process(cmd)
+    
+    if exit_code:
+        raise IOError(stderr)
+    
+    return exit_code, stdout, stderr
 
