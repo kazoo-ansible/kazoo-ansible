@@ -19,6 +19,12 @@
     dest: /etc/kazoo/freeswitch/autoload_configs/kazoo.conf.xml
   notify: Gracefully Restart FreeSwitch
 
+- name: Create FreeSwitch SIP Profile
+  template:
+    src: sipinterface_1.xml.j2
+    dest: /etc/kazoo/freeswitch/sip_profiles/sipinterface_1.xml
+  notify: Gracefully Restart FreeSwitch
+
 - name: Create Freeswitch Service
   copy:
     src: files/kazoo-freeswitch.service
