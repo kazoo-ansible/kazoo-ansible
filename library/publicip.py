@@ -1,10 +1,29 @@
 #!/usr/bin/python3
 
-from six.moves.urllib import request
+from ansible.module_utils.basic import *
+from ansible.module_utils.urls import *
 import json
 import socket
 
+def get_google_ip():
+    try:
+        response = open_url('http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip',
+                method='GET', headers={'Metadata-Flavor': 'Google'})
+        return response.read()
+    except:
+        return None
+
+def get_ip():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(("8.8.8.8", 80))
+    return s.getsockname()[0]
+
 def main():
+    module = AnsibleModule(
+        argument_spec = dict(),
+        supports_check_mode=True
+    )
+
     google_ip = get_google_ip()
 
     if google_ip:
@@ -18,19 +37,6 @@ def main():
             'public_ipv4': ip
         }
     }))
-
-def get_google_ip():
-    try:
-        req = request.Request('http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip')
-        req.add_header('Metadata-Flavor', 'Google')
-        return request.urlopen(req).read()
-    except:
-        return None
-
-def get_ip():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.connect(("8.8.8.8", 80))
-    return s.getsockname()[0]
 
 if __name__ == '__main__':
     main()
