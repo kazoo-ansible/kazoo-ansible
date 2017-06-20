@@ -1,13 +1,15 @@
 #!/usr/bin/python3
 
 from ansible.module_utils.basic import *
-from ansible.module_utils.urls import *
+import ansible.module_utils.urls
 
 KAZOO_DBS = ['accounts', 'acdc', 'alerts' , 'anonymous_cdrs', \
         'dedicated_ips', 'faxes', 'global_provisioner', 'oauth', \
         'offnet', 'port_requests', 'ratedeck', 'services', \
         'sip_auth', 'system_auth', 'system_config', 'system_data', \
         'system_media', 'system_schemas', 'tasks', 'token_auth', 'webhooks']
+
+open_url = ansible.module_utils.urls.open_url
 
 def main():
     module = AnsibleModule(
