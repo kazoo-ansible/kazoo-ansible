@@ -80,6 +80,9 @@
     src: config.js.j2
     dest: /var/www/html/monster-ui/js/config.js
 
+- name: Wait for Database Initialization
+  waitdbinit:
+
 - name: Cluster Freeswitch
   freeswithcluster:
     erlang_cookie: "{{ erlang_cookie }}"
