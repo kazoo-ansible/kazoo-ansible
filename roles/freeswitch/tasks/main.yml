@@ -25,7 +25,7 @@
     dest: /etc/kazoo/freeswitch/sip_profiles/sipinterface_1.xml
   notify: Gracefully Restart FreeSwitch
 
-- name: Create Freeswitch Service
+- name: Create FreeSwitch Service
   copy:
     src: files/kazoo-freeswitch.service
     dest: /lib/systemd/system/kazoo-freeswitch.service
@@ -37,7 +37,7 @@
     daemon_reload: yes
     enabled: yes
 
-- name: Allow Freeswitch Erlang Socket TCP
+- name: Allow FreeSwitch Erlang Socket TCP
   firewalld:
     port: 8031/tcp
     permanent: true

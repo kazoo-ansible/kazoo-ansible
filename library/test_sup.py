@@ -99,3 +99,10 @@ class TestSup:
 
         sup.remove_fs_node('cookie', 'kazoo.lan')
 
+    def test_import_media_imports_media(self, process):
+        process.call_process.side_effect = [(0, '', '')]
+
+        sup.import_media('cookie')
+
+        process.call_process.assert_called_with(['sup', '-c', 'cookie', '-n', 'kazoo_apps', 'kazoo_media_maintenance', 'import_prompts', '/opt/kazoo/sounds/en/us/'])
+
