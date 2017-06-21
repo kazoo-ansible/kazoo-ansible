@@ -16,14 +16,11 @@
     dest: /etc/kazoo/core/config.ini
   notify: Restart Kazoo
 
-- name: Start and Enable Kazoo
+- name: Start and Enable Kazoo Applications
   service:
-    name: "{{ item }}"
+    name: kazoo-applications
     state: started
     enabled: yes
-  with_items:
-   - kazoo-applications
-   - kazoo-ecallmgr
 
 - name: Allow epmd Port
   firewalld:
@@ -80,6 +77,12 @@
 - name: Wait for Database Initialization
   waitdbinit:
 
+- name: Start and Enable ecallmgr
+  service:
+    name: kazoo-ecallmgr
+    state: started
+    enabled: yes
+ 
 - name: Import Media
   importmedia:
     erlang_cookie: "{{ erlang_cookie }}"
