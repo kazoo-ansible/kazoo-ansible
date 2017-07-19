@@ -33,34 +33,6 @@
     owner: bigcouch
   notify: Restart BigCouch
 
-- name: Allow BigCouch Port 5984
-  firewalld:
-    port: 5984/tcp
-    permanent: true
-    immediate: true
-    state: enabled
-
-- name: Allow BigCouch Port 5986
-  firewalld:
-    port: 5986/tcp
-    permanent: true
-    immediate: true
-    state: enabled
-
-- name: Allow epmd Port
-  firewalld:
-    port: 4369/tcp
-    permanent: true
-    immediate: true
-    state: enabled
-
-- name: Allow Distributed Erlang Ports
-  firewalld:
-    port: 11500-11999/tcp
-    permanent: true
-    immediate: true
-    state: enabled
-
 - name: Cluster BigCouch
   couchcluster:
       node_1: "{{ groups['bigcouch'][0] }}"

@@ -37,27 +37,6 @@
     daemon_reload: yes
     enabled: yes
 
-- name: Allow FreeSwitch Erlang Socket TCP
-  firewalld:
-    port: 8031/tcp
-    permanent: true
-    immediate: true
-    state: enabled
-
-- name: Allow epmd Port
-  firewalld:
-    port: 4369/tcp
-    permanent: true
-    immediate: true
-    state: enabled
-
-- name: Allow Ephemeral Ports for ecallmgr
-  firewalld:
-    port: 32768-60999/tcp
-    permanent: true
-    immediate: true
-    state: enabled
-
 - name: Allow FreeSwitch SIP TCP
   firewalld:
     port: 11000/tcp

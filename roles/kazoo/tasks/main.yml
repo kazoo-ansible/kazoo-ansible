@@ -22,20 +22,6 @@
     state: started
     enabled: yes
 
-- name: Allow epmd Port
-  firewalld:
-    port: 4369/tcp
-    permanent: true
-    immediate: true
-    state: enabled
-
-- name: Allow Distributed Erlang Ports
-  firewalld:
-    port: 11500-11999/tcp
-    permanent: true
-    immediate: true
-    state: enabled
-
 - name: Install Nginx
   yum:
     name: nginx
@@ -96,3 +82,4 @@
   kamailiocluster:
     erlang_cookie: "{{ erlang_cookie }}"
     kamailio_ips: "{{ groups['kamailio'] | map('extract', hostvars, ['ansible_default_ipv4', 'address']) | join(',') }}"
+
