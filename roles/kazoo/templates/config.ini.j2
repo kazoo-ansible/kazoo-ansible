@@ -1,6 +1,6 @@
 {% for host in groups['rabbitmq'] %}
 [amqp]
-uri = "amqp://{{ rabbitmq_user }}:{{ rabbitmq_password }}@{{ hostvars[host]['ansible_nodename'] }}:5672"
+uri = "amqp://{{ rabbitmq_user }}:{{ rabbitmq_password }}@{{ hostvars[host]['inventory_hostname'] }}:5672"
 {% endfor %}
 
 [bigcouch]
@@ -14,15 +14,15 @@ admin_port = 15986
 
 {% for host in groups['kazoo'] %}
 [whistle_apps]
-host = {{ hostvars[host]['ansible_nodename'] }}
+host = {{ hostvars[host]['inventory_hostname'] }}
 cookie = {{ erlang_cookie }}
 
 [kazoo_apps]
-host = {{ hostvars[host]['ansible_nodename'] }}
+host = {{ hostvars[host]['inventory_hostname'] }}
 cookie = {{ erlang_cookie }}
 
 [ecallmgr]
-host = {{ hostvars[host]['ansible_nodename'] }}
+host = {{ hostvars[host]['inventory_hostname'] }}
 cookie = {{ erlang_cookie }}
 
 {% endfor %}
