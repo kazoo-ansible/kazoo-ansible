@@ -6,7 +6,7 @@
         <!--<param name="cookie-file" value="/etc/freeswitch/autoload_configs/.erlang.cookie" />-->
         <param name="cookie" value="{{ erlang_cookie }}" />
         <param name="shortname" value="false" />
-        <param name="nodename" value="freeswitch" />
+        <param name="nodename" value="freeswitch@{{ inventory_hostname }}" />
         <!--<param name="kazoo-var-prefix" value="ecallmgr" />-->
         <!--<param name="compat-rel" value="12"/> -->
     </settings>

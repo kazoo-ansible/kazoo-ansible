@@ -28,7 +28,7 @@
 ## SERVER INFORMATION
 ################################################################################
 ## CHANGE "kamailio.2600hz.com" TO YOUR SERVERS HOSTNAME
-#!substdef "!MY_HOSTNAME!{{ hostvars[inventory_hostname]['ansible_nodename'] }}!g"
+#!substdef "!MY_HOSTNAME!{{ inventory_hostname }}!g"
 
 ## CHANGE "127.0.0.1" TO YOUR SERVERS IP ADDRESS
 ##     Usually your public IP.  If you need
@@ -42,17 +42,17 @@
 
 {% for host in groups['rabbitmq'] %}
 
-{% if loop.index is equalto 1 %}
-#!substdef "!MY_AMQP_URL!kazoo://{{ rabbitmq_user }}:{{ rabbitmq_password  }}@{{ hostvars[host]['ansible_nodename'] }}:5672!g"
+{% if loop.index == 1 %}
+#!substdef "!MY_AMQP_URL!kazoo://{{ rabbitmq_user }}:{{ rabbitmq_password  }}@{{ hostvars[host]['inventory_hostname'] }}:5672!g"
 {% endif %}
 
-{% if loop.index is equalto 2 %}
-#!substdef "!MY_AMQP_SECONDARY_URL!kazoo://{{ rabbitmq_user }}:{{ rabbitmq_password }}@{{ hostvars[host]['ansible_nodename'] }}:5672!g"
+{% if loop.index == 2 %}
+#!substdef "!MY_AMQP_SECONDARY_URL!kazoo://{{ rabbitmq_user }}:{{ rabbitmq_password }}@{{ hostvars[host]['inventory_hostname'] }}:5672!g"
 
 {% endif %}
 
-{% if loop.index is equalto 3 %}
-#!substdef "!MY_AMQP_TERTIARY_URL!kazoo://{{ rabbitmq_user }}:{{ rabbitmq_password }}@{{ hostvars[host]['ansible_nodename'] }}:5672!g"
+{% if loop.index == 3 %}
+#!substdef "!MY_AMQP_TERTIARY_URL!kazoo://{{ rabbitmq_user }}:{{ rabbitmq_password }}@{{ hostvars[host]['inventory_hostname'] }}:5672!g"
 
 {% endif %}
 
