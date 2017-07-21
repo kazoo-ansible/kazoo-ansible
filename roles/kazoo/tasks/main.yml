@@ -22,6 +22,12 @@
     state: started
     enabled: yes
 
+- name: Start and Enable ecallmgr
+  service:
+    name: kazoo-ecallmgr
+    state: started
+    enabled: yes
+ 
 - name: Install Nginx
   yum:
     name: nginx
@@ -63,12 +69,6 @@
 - name: Wait for Database Initialization
   waitdbinit:
 
-- name: Start and Enable ecallmgr
-  service:
-    name: kazoo-ecallmgr
-    state: started
-    enabled: yes
- 
 - name: Import Media
   importmedia:
     erlang_cookie: "{{ erlang_cookie }}"
