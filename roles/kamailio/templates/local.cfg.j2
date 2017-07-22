@@ -130,7 +130,8 @@ mhomed=0
 ##     definitions if enabled.  These are here
 ##     for those with complex layouts who know
 ##     what they are doing :)
-listen=UDP_SIP
-listen=TCP_SIP
-listen=UDP_ALG_SIP
-listen=TCP_ALG_SIP
+listen=UDP_SIP advertise {{public_ipv4}}:5060
+listen=TCP_SIP advertise {{public_ipv4}}:5060
+listen=UDP_ALG_SIP advertise {{public_ipv4}}:7000
+listen=TCP_ALG_SIP advertise {{public_ipv4}}:7000
+
