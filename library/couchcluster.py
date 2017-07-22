@@ -8,13 +8,14 @@ import socket
 def main():
     module = AnsibleModule(
         argument_spec = dict(
+            current_node=dict(required=True, type='str'),
             node_1=dict(required=True, type='str')
         ),
         supports_check_mode=True
     )
 
     node_1 = module.params['node_1']
-    current_node = 'bigcouch@' + socket.gethostname()
+    current_node = 'bigcouch@' + module.params['current_node']
 
     try:
         response = open_url('http://' + node_1 + ':5986/nodes/_all_docs')

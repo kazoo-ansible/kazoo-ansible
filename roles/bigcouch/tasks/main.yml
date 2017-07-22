@@ -35,5 +35,6 @@
 
 - name: Cluster BigCouch
   couchcluster:
-      node_1: "{{ groups['bigcouch'][0] }}"
+    current_node: "{{ ansible_fqdn }}"  
+    node_1: "{{ groups['bigcouch'][0] }}"
 
