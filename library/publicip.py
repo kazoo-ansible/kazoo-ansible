@@ -5,13 +5,50 @@ from ansible.module_utils.urls import *
 import json
 import socket
 
-def get_ip(addr):
+def get_ip_google():
+    try:
+        response = open_url('http://169.254.169.254/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip',
+            headers={'Metadata-Flavor': 'Google'})
+        
+        return (response.read(), None)
+    except Exception as exp:
+        return (None, None)
+
+def get_ip_other():
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect((addr, 80))
-        return s.getsockname()[0]
+        with s.connect(('8.8.8.8', 80)):
+            ipv4 = s.getsockname()[0]
     except:
-        return None
+        ipv4 = None
+    
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        with s.connect(('2001:4860:4860::8888', 80)):
+            ipv6 = s.getsockname()[0]
+    except:
+        ipv6 = None
+    
+    return (ipv4, ipv6)
+
+def get_ip():
+    ipv4 = None
+    ipv6 = None
+    
+    for ip_method in [get_ip_google, get_ip_other]:
+        ipv4_result, ipv6_result = ip_method()
+        
+        if ipv4_result and not ipv4:
+            ipv4 = ipv4_result
+        
+        if ipv6_result and not ipv6:
+            ipv6 = ipv6_result
+        
+        if ipv4 is not None and ipv6 is not None:
+            break
+    
+    return (ipv4, ipv6)
+
 
 def main():
     module = AnsibleModule(
@@ -19,8 +56,7 @@ def main():
         supports_check_mode=True
     )
 
-    ipv4 = get_ip('8.8.8.8')
-    ipv6 = get_ip('2001:4860:4860::8888')
+    (ipv4, ipv6) = get_ip()
 
     print(json.dumps({
         'changed': False,
