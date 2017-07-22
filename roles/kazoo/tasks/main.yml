@@ -76,7 +76,7 @@
 - name: Cluster Freeswitch
   freeswithcluster:
     erlang_cookie: "{{ erlang_cookie }}"
-    freeswitch_hosts: "{{ groups['freeswitch'] }}"
+    freeswitch_hosts: "{{ groups['freeswitch'] | map('extract', hostvars, ['ansible_fqdn']) | join(',') }}"
 
 - name: Cluster Kamailio
   kamailiocluster:
