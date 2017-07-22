@@ -8,24 +8,24 @@ import socket
 def get_ip_google():
     try:
         response = open_url('http://169.254.169.254/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip',
-            headers={'Metadata-Flavor': 'Google'})
+            headers={'Metadata-Flavor': 'Google'}, timeout=1)
         
         return (response.read(), None)
-    except Exception as exp:
+    except:
         return (None, None)
 
 def get_ip_other():
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        with s.connect(('8.8.8.8', 80)):
-            ipv4 = s.getsockname()[0]
+        s.connect(('8.8.8.8', 80))
+        ipv4 = s.getsockname()[0]
     except:
         ipv4 = None
     
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        with s.connect(('2001:4860:4860::8888', 80)):
-            ipv6 = s.getsockname()[0]
+        s.connect(('2001:4860:4860::8888', 80))
+        ipv6 = s.getsockname()[0]
     except:
         ipv6 = None
     
