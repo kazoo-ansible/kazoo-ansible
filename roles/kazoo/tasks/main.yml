@@ -1,6 +1,4 @@
 ---
-- include_vars: secrets.yml
-
 - name: Install Kazoo
   yum:
     name: "{{ item }}"
@@ -33,10 +31,10 @@
     name: nginx
     state: latest
 
-- name: Create nginx.conf
+- name: Create Nginx kazoo.conf
   template:
-    src: nginx.conf.j2
-    dest: /etc/nginx/nginx.conf
+    src: kazoo.conf.j2
+    dest: /etc/nginx/kazoo.conf
   notify: Restart Nginx
 
 - name: Start and Enable Nginx

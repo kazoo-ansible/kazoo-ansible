@@ -1,6 +1,4 @@
 ---
-- include_vars: secrets.yml
-
 - name: Install FreeSwitch
   yum:
     name: kazoo-freeswitch
