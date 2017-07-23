@@ -1,5 +1,5 @@
 ---
-kazoo_domain: kazoo.lan
+kazoo_domain: 104.197.173.149
 ssl_certificate: |
   -----BEGIN CERTIFICATE-----
   MIIDGDCCAgACCQCUXb7zeWYLlzANBgkqhkiG9w0BAQsFADBOMRAwDgYDVQQKDAdJ
