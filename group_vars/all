@@ -54,3 +54,5 @@ rabbitmq_user: user
 rabbitmq_password: password
 couch_user: user
 couch_password: password
+carrier_ips:
+  - 192.168.1.1

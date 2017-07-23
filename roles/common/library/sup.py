@@ -17,18 +17,36 @@ process = Process()
 # Matches Name  |  IP
 _regex = re.compile(r'(\S+)\s*?\|\s*?(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\/\d+', re.MULTILINE)
 
+def get_carrier_acls(cookie):
+    return _get_acls(cookie, 'carrier_acls')
+
 def get_sbc_acls(cookie):
-    exit_code, stdout, stderr = _sup_ecallmgr(cookie, ['sbc_acls', 'acl_summary'])
+    return _get_acls(cookie, 'sbc_acls')
+    
+def _get_acls(cookie, acl_type):
+    exit_code, stdout, stderr = _sup_ecallmgr(cookie, [acl_type, 'acl_summary'])
 
     ips = [match[1] for match in re.findall(_regex, stdout)]
 
     return ips
 
+def add_carrier_acl(cookie, ip):
+    _add_acl(cookie, 'allow_carrier', ip)
+
 def add_sbc_acl(cookie, ip):
-    _sup_ecallmgr(cookie, ['allow_sbc', ip, ip])
+    _add_acl(cookie, 'allow_sbc', ip)
+
+def _add_acl(cookie, acl_type, ip):
+    _sup_ecallmgr(cookie, [acl_type, ip, ip])
+
+def remove_carrier_acl(cookie, ip):
+    _remove_acl(cookie, 'carrier_acls', ip)
 
 def remove_sbc_acl(cookie, ip):
-    exit_code, stdout, stderr = _sup_ecallmgr(cookie, ['sbc_acls', 'acl_summary'])
+    _remove_acl(cookie, 'sbc_acls', ip)
+
+def _remove_acl(cookie, acl_type, ip):
+    exit_code, stdout, stderr = _sup_ecallmgr(cookie, [acl_type, 'acl_summary'])
 
     matches = [match for match in re.findall(_regex, stdout) if match[1] == ip]
 
