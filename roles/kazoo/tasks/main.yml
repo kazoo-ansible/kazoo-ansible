@@ -90,10 +90,6 @@
 - name: Wait for Database Initialization
   waitdbinit:
 
-- name: Import Media
-  importmedia:
-    erlang_cookie: "{{ erlang_cookie }}"
-
 - name: Cluster Freeswitch
   freeswithcluster:
     erlang_cookie: "{{ erlang_cookie }}"
