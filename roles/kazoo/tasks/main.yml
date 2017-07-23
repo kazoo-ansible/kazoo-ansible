@@ -34,7 +34,7 @@
 - name: Create Nginx kazoo.conf
   template:
     src: kazoo.conf.j2
-    dest: /etc/nginx/kazoo.conf
+    dest: /etc/nginx/conf.d/kazoo.conf
   notify: Restart Nginx
 
 - name: Start and Enable Nginx
@@ -55,6 +55,13 @@
     immediate: true
     state: enabled
 
+- name: Allow Https Port
+  firewalld:
+    port: 443/tcp
+    permanent: true
+    immediate: true
+    state: enabled
+
 - name: Allow Httpd to Connect to the Network
   shell: setsebool -P httpd_can_network_connect 1
   changed_when: false
@@ -63,6 +70,22 @@
   template:
     src: config.js.j2
     dest: /var/www/html/monster-ui/js/config.js
+
+- name: Install SSL Certificate
+  copy:
+    content: "{{ ssl_certificate }}"
+    dest: /etc/pki/tls/certs/kazoo.crt
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Install SSL Private Key
+  copy:
+    content: "{{ ssl_private_key }}"
+    dest: /etc/pki/tls/private/kazoo.pem
+    owner: root
+    group: root
+    mode: 0600
 
 - name: Wait for Database Initialization
   waitdbinit:
