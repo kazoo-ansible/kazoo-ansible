@@ -53,7 +53,7 @@ def main():
         module.exit_json(changed=changed)
 
     except IOError as error:
-        module.fail_json(msg=error.value)
+        module.fail_json(msg=error)
     
 if __name__ == '__main__':
     main()

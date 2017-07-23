@@ -53,5 +53,5 @@ rabbitmq_user: changeme
 rabbitmq_password: changeme
 couch_user: changeme
 couch_password: changeme
-carrier_ips:
+carrier_ips: []
 

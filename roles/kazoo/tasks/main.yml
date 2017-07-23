@@ -37,16 +37,29 @@
     dest: /etc/nginx/conf.d/kazoo.conf
   notify: Restart Nginx
 
+- name: Install SSL Certificate
+  copy:
+    content: "{{ ssl_certificate }}"
+    dest: /etc/pki/tls/certs/kazoo.crt
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart Nginx
+
+- name: Install SSL Private Key
+  copy:
+    content: "{{ ssl_private_key }}"
+    dest: /etc/pki/tls/private/kazoo.pem
+    owner: root
+    group: root
+    mode: 0600
+  notify: Restart Nginx
+
 - name: Start and Enable Nginx
   service:
     name: nginx
     state: started
     enabled: yes
-
-- name: Install MonsterUI
-  yum:
-    name: monster-ui*
-    state: latest
 
 - name: Allow Http Port
   firewalld:
@@ -66,26 +79,16 @@
   shell: setsebool -P httpd_can_network_connect 1
   changed_when: false
 
+
+- name: Install MonsterUI
+  yum:
+    name: monster-ui*
+    state: latest
+
 - name: Create MonsterUI config.js
   template:
     src: config.js.j2
     dest: /var/www/html/monster-ui/js/config.js
-
-- name: Install SSL Certificate
-  copy:
-    content: "{{ ssl_certificate }}"
-    dest: /etc/pki/tls/certs/kazoo.crt
-    owner: root
-    group: root
-    mode: 0644
-
-- name: Install SSL Private Key
-  copy:
-    content: "{{ ssl_private_key }}"
-    dest: /etc/pki/tls/private/kazoo.pem
-    owner: root
-    group: root
-    mode: 0600
 
 - name: Wait for Database Initialization
   waitdbinit:
@@ -100,3 +103,4 @@
     erlang_cookie: "{{ erlang_cookie }}"
     kamailio_ips: "{{ groups['kamailio'] | map('extract', hostvars, ['ansible_default_ipv4', 'address']) | join(',') }}"
     carrier_ips: "{{ carrier_ips | default('[]') }}"
+
