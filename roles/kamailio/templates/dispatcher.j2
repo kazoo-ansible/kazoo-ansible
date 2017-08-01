@@ -1,4 +1,0 @@
-id(int,auto) setid(int) destination(string) flags(int) priority(int) attrs(string) description(string)
-{% for host in groups['freeswitch'] %}
-:1:sip\:{{ hostvars[host]['ansible_default_ipv4']['address'] }}\:11000:0:0::
-{% endfor %}
