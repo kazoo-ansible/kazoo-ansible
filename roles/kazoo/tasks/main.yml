@@ -102,5 +102,4 @@
   kamailiocluster:
     erlang_cookie: "{{ erlang_cookie }}"
     kamailio_ips: "{{ groups['kamailio'] | map('extract', hostvars, ['ansible_default_ipv4', 'address']) | join(',') }}"
-    carrier_ips: "{{ carrier_ips | default('[]') }}"
 

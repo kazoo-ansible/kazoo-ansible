@@ -11,7 +11,6 @@ def main():
         argument_spec = dict(
             erlang_cookie = dict(required=True, type='str'),
             kamailio_ips = dict(required=True, type='list'),
-            carrier_ips = dict(required=True, type='list')
         ),
         supports_check_mode=True
     )
@@ -23,17 +22,12 @@ def main():
 
     try:
         existing_kamailio_ips = sup.get_sbc_acls(cookie)
-        existing_carrier_ips = sup.get_carrier_acls(cookie)
         kamailio_ips = module.params['kamailio_ips']
-        carrier_ips = module.params['carrier_ips']
 
         new_kamailio_ips = [ip for ip in kamailio_ips if ip not in existing_kamailio_ips]
-        new_carrier_ips = [ip for ip in carrier_ips if ip not in existing_carrier_ips]
         extra_kamailio_ips = [ip for ip in existing_kamailio_ips if ip not in kamailio_ips]
-        extra_carrier_ips = [ip for ip in existing_carrier_ips if ip not in carrier_ips]
 
-        changed = len(new_kamailio_ips) + len(new_carrier_ips) + \
-                  len(extra_kamailio_ips) + len(extra_carrier_ips) != 0
+        changed = len(new_kamailio_ips) + len(extra_kamailio_ips) != 0
 
         if module.check_mode:
             module.exit_json(changed=changed)
@@ -41,14 +35,8 @@ def main():
         for ip in extra_kamailio_ips:
             sup.remove_sbc_acl(cookie, ip)
 
-        for ip in extra_carrier_ips:
-            sup.remove_carrier_acl(cookie, ip)
-
         for ip in new_kamailio_ips:
             sup.add_sbc_acl(cookie, ip)
-
-        for ip in new_carrier_ips:
-            sup.add_carrier_acl(cookie, ip)
 
         module.exit_json(changed=changed)
 
