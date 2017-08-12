@@ -1,5 +1,5 @@
 ---
-kazoo_domain: 104.197.173.149
+kazoo_domain: 104.198.69.49
 ssl_certificate: |
   -----BEGIN CERTIFICATE-----
   MIIDGDCCAgACCQCUXb7zeWYLlzANBgkqhkiG9w0BAQsFADBOMRAwDgYDVQQKDAdJ
