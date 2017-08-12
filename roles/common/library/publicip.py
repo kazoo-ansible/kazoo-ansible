@@ -14,6 +14,15 @@ def get_ip_google():
     except:
         return (None, None)
 
+def get_ip_ec2():
+    try:
+        response = open_url('http://169.254.169.254/latest/meta-data/public-ipv4',
+            headers={'Metadata-Flavor': 'Google'}, timeout=1)
+
+        return (response.read(), None)
+    except:
+        return (None, None)
+
 def get_ip_other():
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -35,7 +44,7 @@ def get_ip():
     ipv4 = None
     ipv6 = None
     
-    for ip_method in [get_ip_google, get_ip_other]:
+    for ip_method in [get_ip_google, get_ip_ec2, get_ip_other]:
         ipv4_result, ipv6_result = ip_method()
         
         if ipv4_result and not ipv4:
