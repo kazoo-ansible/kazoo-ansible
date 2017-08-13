@@ -1,0 +1,13 @@
+[Unit]
+Description=CouchDB
+After=network-online.target
+
+[Service]
+User=couchdb
+Group=couchdb
+PermissionsStartOnly=true
+ExecStart=/opt/couchdb/bin/couchdb
+
+[Install]
+WantedBy=multi-user.target
+
