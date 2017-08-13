@@ -23,13 +23,13 @@ defaults
         
 listen bigcouch-data 127.0.0.1:15984
   balance roundrobin
-    {% for host in groups['bigcouch'] %}
+    {% for host in groups['couchdb'] %}
         server {{ hostvars[host]['ansible_fqdn'] }} {{ hostvars[host]['ansible_default_ipv4']['address'] }}:5984 check
     {% endfor %}
 
 listen bigcouch-mgr 127.0.0.1:15986
   balance roundrobin
-    {% for host in groups['bigcouch'] %}
+    {% for host in groups['couchdb'] %}
         server {{ hostvars[host]['ansible_fqdn'] }} {{ hostvars[host]['ansible_default_ipv4']['address'] }}:5986 check
     {% endfor %}
 

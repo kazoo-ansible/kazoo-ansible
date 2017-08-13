@@ -4,6 +4,11 @@
   roles:
    - role: common
 
+- hosts: couchdb
+  become: true
+  roles:
+   - role: couchdb
+
 - hosts: rabbitmq
   become: true
   roles:
@@ -18,11 +23,6 @@
   become: true
   roles:
    - role: kamailio
-
-- hosts: bigcouch
-  become: true
-  roles:
-   - role: bigcouch
 
 - hosts: kazoo
   become: true

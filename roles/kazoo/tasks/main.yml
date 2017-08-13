@@ -32,6 +32,9 @@
     state: started
     enabled: yes
  
+- name: Wait for Database Initialization
+  waitdbinit:
+
 - name: Install Nginx
   yum:
     name: nginx
@@ -85,7 +88,6 @@
   shell: setsebool -P httpd_can_network_connect 1
   changed_when: false
 
-
 - name: Install MonsterUI
   yum:
     name: monster-ui*
@@ -95,9 +97,6 @@
   template:
     src: config.js.j2
     dest: /var/www/html/monster-ui/js/config.js
-
-- name: Wait for Database Initialization
-  waitdbinit:
 
 - name: Cluster Freeswitch
   freeswithcluster:

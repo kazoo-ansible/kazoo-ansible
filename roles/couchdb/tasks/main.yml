@@ -39,8 +39,7 @@
   template:
     src: local.ini.j2
     dest: /opt/couchdb/etc/local.ini
-    owner: couchdb
-    group: couchdb
+    owner: kazoo
   notify: Restart CouchDB
 
 - name: Create CouchDB vm.args
