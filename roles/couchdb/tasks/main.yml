@@ -62,3 +62,11 @@
     daemon_reload: yes
     enabled: yes
 
+- name: Cluster CouchDB
+  couchcluster:
+    current_node: "{{ ansible_fqdn }}"
+    node_1: "{{ groups['couchdb'][0] }}"
+    couch_user: "{{ couch_user }}"
+    couch_password: "{{ couch_password }}"
+  notify: Restart CouchDB
+

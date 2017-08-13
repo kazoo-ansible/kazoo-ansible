@@ -19,15 +19,22 @@ uuid = ec0e4f7234b1b9d7947fbb07df1c7fc4
 ; deleted as well.
 ;delete_dbs = true
 
+[cluster]
+q=8
+r=2
+w=2
+n=3
+
 [chttpd]
 ;port = 5984
-;bind_address = 127.0.0.1
+bind_address = 0.0.0.0
 ; Options for the MochiWeb HTTP server.
 ;server_options = [{backlog, 128}, {acceptor_pool_size, 16}]
 ; For more socket options, consult Erlang's module 'inet' man page.
 ;socket_options = [{recbuf, 262144}, {sndbuf, 262144}, {nodelay, true}]
 
 [httpd]
+bind_address = 0.0.0.0
 ; NOTE that this only configures the "backend" node-local port, not the
 ; "frontend" clustered port. You probably don't want to change anything in
 ; this section.
