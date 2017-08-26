@@ -3,7 +3,7 @@
   yum:
     name: '*'
     state: latest
-    exclude: 'freeswitch*,kamailio*'
+    exclude: 'freeswitch*,kamailio*,kazoo*'
 
 - name: Check for Reboot Required
   shell: needs-restarting -r
