@@ -90,7 +90,7 @@
 
 - name: Install MonsterUI
   yum:
-    name: monster-ui*
+    name: monster-ui
     state: latest
 
 - name: Create MonsterUI config.js

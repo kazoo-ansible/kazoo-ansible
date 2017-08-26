@@ -8,7 +8,7 @@
 
 - name: Install 2600hz Stable Repo
   yum:
-    name: https://packages.2600hz.com/artifacts/2600hz-release/4.1/centos/7/2600hz-release-4.1-0.el7.centos.noarch.rpm
+    name: https://packages.2600hz.com/centos/7/stable/2600hz-release/4.1/2600hz-release-4.1-0.el7.centos.noarch.rpm
     state: installed
 
 - name: Install Delta RPMs
