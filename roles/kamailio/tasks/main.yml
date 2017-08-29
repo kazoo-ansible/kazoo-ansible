@@ -17,18 +17,6 @@
     dest: /etc/kazoo/kamailio/local.cfg
   notify: Restart Kamailio
 
-- name: Create Kamailio default.cfg
-  template:
-    src: default.cfg.j2
-    dest: /etc/kazoo/kamailio/default.cfg
-  notify: Restart Kamailio
-
-- name: Create Kamailio presence-role.cfg
-  template:
-    src: presence-role.cfg.j2
-    dest: /etc/kazoo/kamailio/presence-role.cfg
-  notify: Restart Kamailio
-
 - name: Start and Enable Kazoo Kamailio
   service:
     name: kazoo-kamailio
