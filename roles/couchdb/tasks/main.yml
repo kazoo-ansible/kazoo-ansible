@@ -68,3 +68,10 @@
     couch_password: "{{ couch_password }}"
   notify: Restart CouchDB
 
+- name: CouchDB Init
+  couchdbinit:
+    current_node: "{{ ansible_fqdn }}"
+    couch_user: "{{ couch_user }}"
+    couch_password: "{{ couch_password }}"
+  notify: Restart CouchDB
+
