@@ -39,20 +39,30 @@ def get_missing_dbs(current_node, couch_user, couch_password):
     missing_dbs = []
     
     for db in DBs: 
-        response = open_url('http://' + couch_user + ':' + \
-                couch_password + '@' + current_node + ':5984/' + \
-                db, force_basic_auth=True)
-        
-        if 'not_found' in response.read():
-            missing_dbs.append(db)
+        try:
+            response = open_url('http://' + couch_user + ':' + \
+                    couch_password + '@' + current_node + ':5984/' + \
+                    db, force_basic_auth=True)
+        except Exception as ex:
+            if '404' in str(ex):
+                missing_dbs.append(db)
+            else:
+                raise(ex)
     
     return missing_dbs
 
-def create_missing_dbs(current_node, couch_user, couch_password, missing_dbs):
+def create_dbs(current_node, couch_user, couch_password, missing_dbs):
     for db in missing_dbs:
-        response = open_url('http://' + couch_user + ':' + \
-                couch_password + '@'+ current_node + ':5984/' + \
-                db, method='PUT', data=json.dumps({}), force_basic_auth=True)
+        try:
+            response = open_url('http://' + couch_user + ':' + \
+                    couch_password + '@'+ current_node + ':5984/' + \
+                    db, method='PUT', data=json.dumps({}), force_basic_auth=True)
+        except Exception as ex:
+            if '412' in str(ex):
+                # Ignore race condition in DB creation
+                pass
+            else:
+                raise ex
 
 if __name__ == '__main__':
     main()
