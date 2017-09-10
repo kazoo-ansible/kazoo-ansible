@@ -29,6 +29,11 @@
   roles:
    - role: kazoo
 
+- hosts: monsterui
+  become: true
+  roles:
+   - role: monsterui
+
 - hosts: all
   become: true
   roles:
