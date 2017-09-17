@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<zone target="ACCEPT">
-  <short>Kazoo</short>
-  <description>Allow all hosts in the Kazoo cluster to communicate.</description>  
-{% for host in groups['all'] %}
-  <source address="{{ hostvars[host]['ansible_default_ipv4']['address'] }}"/>
-{% endfor %}
-</zone>

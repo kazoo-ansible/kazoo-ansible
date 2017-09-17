@@ -1,6 +1,0 @@
----
-- name: Restart HAProxy
-  service:
-    name: kazoo-haproxy
-    state: restarted
-

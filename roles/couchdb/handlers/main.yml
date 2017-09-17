@@ -1,6 +1,0 @@
----
-- name: Restart CouchDB
-  service:
-    name: couchdb
-    state: restarted
-

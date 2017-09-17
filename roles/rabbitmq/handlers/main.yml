@@ -1,6 +1,0 @@
----
-- name: Restart Rabbitmq
-  service:
-    name: kazoo-rabbitmq
-    state: restarted
-

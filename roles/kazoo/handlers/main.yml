@@ -1,9 +1,0 @@
----
-- name: Restart Kazoo
-  service:
-    name: "{{ item }}"
-    state: restarted
-  with_items:
-   - kazoo-applications
-   - kazoo-ecallmgr
-
