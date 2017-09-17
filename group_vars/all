@@ -1,0 +1,12 @@
+---
+kazoo_domain: my-domain.net
+ssl_certificate: |
+  my_certificate
+ssl_private_key: |
+  my_private_key
+erlang_cookie: my_erlang_cookie
+rabbitmq_user: my_rabbit_user
+rabbitmq_password: my_rabbit_password
+couch_user: my_couch_user
+couch_password: my_couch_password
+
