@@ -1,12 +1,60 @@
 ---
-kazoo_domain: my-domain.net
-ssl_certificate: |
-  my_certificate
-ssl_private_key: |
-  my_private_key
-erlang_cookie: my_erlang_cookie
-rabbitmq_user: my_rabbit_user
-rabbitmq_password: my_rabbit_password
-couch_user: my_couch_user
-couch_password: my_couch_password
+kazoo_domain: kazoo.lan
+kazoo_tls_certificate: |
+  -----BEGIN CERTIFICATE-----
+  MIIDpzCCAo+gAwIBAgIJAPlntr4foo1sMA0GCSqGSIb3DQEBCwUAMGoxCzAJBgNV
+  BAYTAlVTMREwDwYDVQQIDAhNaWNoaWdhbjEQMA4GA1UEBwwHTGl2b25pYTEiMCAG
+  A1UECgwZQ0lUQSBDb21tdW5pY2F0aW9ucywgSW5jLjESMBAGA1UEAwwJa2F6b28u
+  bGFuMB4XDTE3MTAwMTE3MTgyMVoXDTE4MTAwMTE3MTgyMVowajELMAkGA1UEBhMC
+  VVMxETAPBgNVBAgMCE1pY2hpZ2FuMRAwDgYDVQQHDAdMaXZvbmlhMSIwIAYDVQQK
+  DBlDSVRBIENvbW11bmljYXRpb25zLCBJbmMuMRIwEAYDVQQDDAlrYXpvby5sYW4w
+  ggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCjcmMML+bl4JMG+LdS6Iu5
+  4w72xtmwGGWEb5jcNnPXWIUP37Vxv2BD4LV6M7C9VoJhwmGCf+IzvzxHuH3Bm8mb
+  8wD0Xip/QYZ9FARVMBlPskWjYs2qccQ35GnKa23LhjJZjbq3RUy4Q4pi9fCD8upR
+  nBxNrXkwt43+oYNDHArI0j7whM0yMSTAqOv57EK86UJuxq0a+tze0TzUYsBfLHD6
+  e/O0++sEI730GNGO6fXJYhmMood/rwg1ygeB/qLKjSRqYXoqY1zf3WrlxI4fRmSR
+  kU4sYUE3us0o4BxlLx4FtbtOE2dykcTdBTCfyshJuP2+Y7PsIg9ABZnI+ypphMKb
+  AgMBAAGjUDBOMB0GA1UdDgQWBBTy7fyPYqb+Dsx/4Ji2mlD7GbI70DAfBgNVHSME
+  GDAWgBTy7fyPYqb+Dsx/4Ji2mlD7GbI70DAMBgNVHRMEBTADAQH/MA0GCSqGSIb3
+  DQEBCwUAA4IBAQBX59IsOxTRu95LuVzMc1GjwMIzhHxEYoKkfkNuxB+y+w0wT5NA
+  EORZJ9txofH3xf3W+bCfvn27Yonjn5tnOtyWB60Xf1SOvZ6EVZ4Ilw8eDnNmHo5c
+  1tMOT/HPSYMIhQEDiehmI2qdYZGZLhCuxH5YvbbO0ycv177dir940R9VpSO8vQlB
+  x7w9saS04t8Eh28DlNVWxHXjoYaBF4BkzyP+FcyMJ0qB0X81fXQhi/7P/1MgUq/m
+  pmFKvyCyGiLFTLJNZQKSGosV5zdqRsiqILG/KMRzl1Gn8wNOW1oRWGzIiOTWtFKo
+  GtJu3AdRqteekIgROmF8wcUzF5HxL+0kmrLp
+  -----END CERTIFICATE-----
+kazoo_tls_private_key: |
+  -----BEGIN PRIVATE KEY-----
+  MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCjcmMML+bl4JMG
+  +LdS6Iu54w72xtmwGGWEb5jcNnPXWIUP37Vxv2BD4LV6M7C9VoJhwmGCf+IzvzxH
+  uH3Bm8mb8wD0Xip/QYZ9FARVMBlPskWjYs2qccQ35GnKa23LhjJZjbq3RUy4Q4pi
+  9fCD8upRnBxNrXkwt43+oYNDHArI0j7whM0yMSTAqOv57EK86UJuxq0a+tze0TzU
+  YsBfLHD6e/O0++sEI730GNGO6fXJYhmMood/rwg1ygeB/qLKjSRqYXoqY1zf3Wrl
+  xI4fRmSRkU4sYUE3us0o4BxlLx4FtbtOE2dykcTdBTCfyshJuP2+Y7PsIg9ABZnI
+  +ypphMKbAgMBAAECggEANeJyMQRh1QtyrWu11ImB9yiaOFVaUynX3g+Ej6UMD8TJ
+  KXCROwziyb39VmpQLDunBF+3EfTjODglwWdbXkbj8pvshqO80vNhST8eJo+S6KlX
+  OARM1ZJoJB0Tm35LVjvJwahuFBmur1jk+LcoMfgVtA4JbrpwJ9V75KSOx8Mo8weG
+  gQr7UKqzZaJw6uVM5++b4vjG0ns3Jg+cV2xPTu/mJ365O7DCs9E4XuMqOuOCOcZR
+  61sJpJamiZ6/2l4/BSfyAs9h8J5gpbhObKRMaEt7PQoLJeYxt49KpAK6GfTnh5Wu
+  LWNKwA6R2bvBUWmtOutcKrMWZIznfr7N70BbpczI4QKBgQDPapjmMnDJw6YG8wOA
+  sTAc6gCAA5CMecX51C+gQQCIkubDHmBcM0B4S1R+W+fW0NhDTc8Tdh//29RI2ly5
+  d7rAThMgAklam1W3KZqkHUZ6R75/R09s4jARZZPIlDwnmyANirfWaulPnCY9r3bP
+  /F16wVW+Aef34q0eilh+YNwLYwKBgQDJuzjv/AHOXZpJ/A2oIVQy7KF4w+Hq9LXs
+  cldNY2ZzUwbnVeoiBADeGf9LPIOQrZoGkVP5gQMuvM8f6xLDrQZ8uRHYM51Y1QYZ
+  z5xJpHHbQhtRtB6DDlHz6N2W5QhFuY2Hny2v8Ez8/KbMTHNcalsSf1+z5ijKtWaM
+  qVEARnS9aQKBgGpvSvKlY5dFnIboYR3CzuuncIZATgan3l2q8p2LfZiXuW7awZvO
+  eQDBtyP4SWnEVZWD8gUMkrMavT59PyO1OtG/vrSoN7gVCdEpuj8I/sd01V4+25UG
+  JKBovYMp/gxc3//S9S9EQWEmwcDZr2BfIiEB4NvV4pEjcq6/U1XWolP9AoGAY3Ep
+  JhPCCCpYDjRzvvd+/ANtrYxR53Jt43qR0pI3RI4fDxZo7g+vJc0G7d2MtVr+XFJz
+  ZMDWAsoMCB3nCBJY6k6In10CKXIJKdwPnLW1cnHp6aKyj8QVXfjikqmgJE7Nl5c9
+  /EamjOc2ier9ywaakkm7sYC5hwNY4+nrBgm1LlECgYEAkFisbpNIesOYCpFbiHXF
+  HUshJfpIqqN8BUQxepytLatmyPD36JI4kDWWZL1PNYIinNYY6T4RkOOiVRSpIr+S
+  pa9H6P8PQaMUbybNJ/y8GlqRNBFEDpUAe90GmS/7CB9pa75Ln3xrD/zIdEQZvShz
+  I/s+dgYhP0838jiuEoaWnhE=
+  -----END PRIVATE KEY-----
+erlang_cookie: asdfcFWE4j3of34wf
+rabbitmq_user: rabbitmq
+rabbitmq_password: lasf34G8fgarefae
+couch_user: couchdb
+couch_password: 7865Fihfa34f3wfawe4F
 
