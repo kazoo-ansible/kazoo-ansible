@@ -1,5 +1,10 @@
 ---
 kazoo_domain: kazoo.lan
+
+# Uncomment the line below and comment the kazoo_tls variables to enable 
+# Let's Encrypt
+# kazoo_enable_lets_encrypt: yes
+
 kazoo_tls_certificate: |
   -----BEGIN CERTIFICATE-----
   MIIDpzCCAo+gAwIBAgIJAPlntr4foo1sMA0GCSqGSIb3DQEBCwUAMGoxCzAJBgNV
