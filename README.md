@@ -1,4 +1,30 @@
 # kazoo-ansible
 Ansible Playbooks to orchestrate the various components of [2600hz Kazoo](https://github.com/2600hz/kazoo).
 
-This is very much a work in-progress right now. I will let you know once it is at least somewhat useful.
+## Features
+- Automatically clusters CouchDB, Freeswitch, Kamailio, and Kazoo
+- Let's Encrypt TLS certificate generation for Monster UI, including 
+support for multiple Monster UI hosts
+- Uses CouchDB instead of BigCouch
+- Uses specific versions of Freeswitch, Kamailio, Kazoo, and Monster UI 
+by default
+- Splits up roles for CouchDB, Freeswitch, Kamailio, Kazoo, Monster UI, 
+and RabbitMQ to allow lots of cluster custimization
+- Publishes roles to Ansible Galaxy to allow easy integration into 
+custom playbooks
+- Manages Kazoo, Monster UI, Kamailio, and Freeswitch component versions 
+by default to prevent untested versions from making it into production
+
+## Desired Future Improvements
+- Support for multiple zones
+- CouchDB backup roles
+
+## License
+MIT License
+
+## Contributions
+There are many ways to contribute:
+- Suggestions
+- Bug Reports
+- Pull Requests
+
