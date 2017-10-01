@@ -41,6 +41,8 @@ kazoo ansible
 - Edit `group_vars/all` and `site.yml` to your liking
 - Add hosts for each role in `site.yml` in `/etc/ansible/hosts`
 - Run `ansible-playbook site.yml`
+- SSH into one of the Kazoo servers, import media, create the first admin 
+account, and setup the Monster UI applications
 
 ## Using kazoo-ansible with Existing Playbooks
 If you want to use kazoo-ansible with existing playbooks, simply
