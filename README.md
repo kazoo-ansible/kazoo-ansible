@@ -14,8 +14,6 @@ guarantees.
 - Let's Encrypt TLS certificate generation for Monster UI, including 
 support for multiple Monster UI hosts
 - Uses CouchDB instead of BigCouch
-- Uses specific versions of Freeswitch, Kamailio, Kazoo, and Monster UI 
-by default
 - Splits up roles for CouchDB, Freeswitch, Kamailio, Kazoo, Monster UI, 
 and RabbitMQ to allow lots of cluster custimization
 - Publishes roles to Ansible Galaxy to allow easy integration into 
