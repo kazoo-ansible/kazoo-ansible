@@ -55,7 +55,7 @@ There are many ways to contribute:
 ## Versioning Strategy
 This project uses [Semantic Versioning](http://semver.org). In 
 practical terms, this means:
-- Version numbers include MAJOR.MINOR.PATC
+- Version numbers include MAJOR.MINOR.PATCH
 - Major versions include backward-incompatible changes. This includes 
 updating to major Kazoo versions, CentOS upgrades, or any other 
 breaking changes.
