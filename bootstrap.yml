@@ -1,14 +1,24 @@
 ---
 - hosts: all
   tasks:
-    - name: Create ssh directory
+    - name: Create .ssh directory
       file:
         path: ~/.ssh
         state: directory
         mode: 0700
+    
     - name: Install authorized key from Ansible host
       copy:
         src: "{{ ansible_env.HOME }}/.ssh/id_rsa.pub"
         dest: "{{ ansible_env.HOME }}/.ssh/authorized_keys"
         mode: 0644
+    
+    - name: Enable passwordless sudo
+      become: true
+      file:
+        src: files/sudoers
+        dest: /etc/sudoers
+        owner: root
+        owner: root
+        mode: 0440
 
