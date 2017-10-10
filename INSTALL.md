@@ -98,6 +98,6 @@ Complete these steps on every Kazoo node that will be managed by kazoo-ansible.
    :wq<enter>
    ```
 10. Modify the permissions of authorized_keys
-   ```bash
-   chmod 644 ~/.ssh/authorized_keys
-   ```
+    ```bash
+    chmod 644 ~/.ssh/authorized_keys
+    ```
