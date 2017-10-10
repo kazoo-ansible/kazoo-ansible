@@ -7,7 +7,11 @@ Complete these steps on the Ansible Host that will run kazoo-ansible.
    ```bash
    ssh kazoo-ansible.lan
    ```
-2. Generate an SSH key that will be used to manage Kazoo nodes
+2. Install prerequisites
+   ```bash
+   sudo yum install -y git ansible
+   ```
+3. Generate an SSH key that will be used to manage Kazoo nodes
    ```bash
    ssh-keygen
    Generating public/private rsa key pair.
@@ -32,14 +36,24 @@ Complete these steps on the Ansible Host that will run kazoo-ansible.
    | .B. .E.         |
    +----[SHA256]-----+
    ```
-3. Copy the contents ~/.ssh/id_rsa.pub, so the public key can be used for the 
+4. Copy the contents ~/.ssh/id_rsa.pub, so the public key can be used for the 
    Kazoo Node Setup
    ```bash
    cat ~/.ssh/id_rsa.pub
    # Copy this public key to the clipboard
    ssh-rsa AAA...wLX tnewman@kazoo.lan
    ```
-   
+5. Clone the kazoo-ansible repo
+   ```bash
+   cd ~
+   git clone https://github.com/kazoo-ansible/kazoo-ansible
+   ```
+6. Install the latest kazoo-ansible roles
+   ```bash
+   cd ~/kazoo-ansible
+   sudo ansible-galaxy install -r requirements.yml
+   ```
+
 ## Kazoo Node Setup
 Complete these steps on every Kazoo node that will be managed by kazoo-ansible.
 
