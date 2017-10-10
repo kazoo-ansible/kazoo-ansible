@@ -72,6 +72,7 @@ Complete these steps on the Ansible Host that will run kazoo-ansible.
    ```
 6. Edit group_vars/all (Hint: Press i for insert mode and Escape for command mode)
    ```bash
+   $ cd ~/kazoo-ansible
    $ vi group_vars/all
    ```
 7. Modify group_vars based on your cluster configuration
@@ -134,7 +135,7 @@ Complete these steps on the Ansible Host that will run kazoo-ansible.
 2. Run the kazoo-ansible Ansible Playbook
    ```bash
    $ cd ~/kazoo-ansible
-   $ ansible-playbook site.yml
+   $ ansible-playbook ~/kazoo-ansible/site.yml
    ```
 
 ## Post Playbook Steps
