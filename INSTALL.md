@@ -197,3 +197,38 @@ Complete these steps on every Kazoo node that will be managed by kazoo-ansible.
     ```bash
     chmod 644 ~/.ssh/authorized_keys
     ```
+
+## Running kazoo-ansible Playbook
+1. SSH into the Ansible host
+   ```bash
+   ssh kazoo-ansible.lan
+   ```
+2. Run the kazoo-ansible Ansible Playbook
+   ```bash
+   cd ~/kazoo-ansible
+   ansible-playbook site.yml
+   ```
+
+## Post Playbook Steps
+1. SSH into one of the Kazoo nodes with the kazoo role
+   ```bash
+   ssh kazoo.lan
+   ```
+2. Import FreeSwitch Media
+   ```bash
+   # EN-US prompts
+   sup kazoo_media_maintenance import_prompts /opt/kazoo/sounds/en/us/
+   
+   # Add additional prompts as needed
+   # sup kazoo_media_maintenance import_prompts /opt/kazoo/sounds/fr/ca fr-ca
+   ```
+3. Create the Kazoo Master Administrator Account
+   ```bash
+   # Create an account with your own account name, realm, username, and password
+   sup crossbar_maintenance create_account YOUR_ACCOUNT_NAME YOUR_REALM YOUR_USERNAME YOUR_PASSWORD
+   ```
+4. Initialize MonsterUI Applications
+   ```bash
+   # Initialize MonsterUI using the Kazoo domain set in group_vars/all
+   sup crossbar_maintenance init_apps /var/www/html/monster-ui/apps https://kazoo_domain.lan/crossbar/v2
+   ```
