@@ -9,7 +9,7 @@ Complete these steps on the Ansible Host that will run kazoo-ansible.
    ```
 2. Install prerequisites
    ```bash
-   sudo yum install -y git ansible
+   sudo yum install -y git vi ansible
    ```
 3. Generate an SSH key that will be used to manage Kazoo nodes
    ```bash
@@ -86,7 +86,7 @@ Complete these steps on every Kazoo node that will be managed by kazoo-ansible.
    ```
 7. Open the authorized_keys file
    ```bash
-   vim ~/.ssh/authorized_keys
+   vi ~/.ssh/authorized_keys
    ```
 8. Save the authorized_keys file
    ```bash
