@@ -11,15 +11,13 @@ guarantees.
 
 ## Features
 - Automatically clusters CouchDB, Freeswitch, Kamailio, and Kazoo
-- Let's Encrypt TLS certificate generation for Monster UI, including 
-support for multiple Monster UI hosts
+- Optional Let's Encrypt TLS certificate generation for Monster UI, including 
+  support for multiple Monster UI hosts
 - Uses CouchDB instead of BigCouch
 - Splits up roles for CouchDB, Freeswitch, Kamailio, Kazoo, Monster UI, 
-and RabbitMQ to allow lots of cluster custimization
+  and RabbitMQ to allow lots of cluster custimization
 - Publishes roles to Ansible Galaxy to allow easy integration into 
-custom playbooks
-- Manages Kazoo, Monster UI, Kamailio, and Freeswitch component versions 
-by default to prevent untested versions from making it into production
+  custom playbooks
 
 ## Desired Future Improvements
 - Support for multiple zones
