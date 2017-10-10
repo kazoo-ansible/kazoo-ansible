@@ -1,0 +1,14 @@
+---
+- hosts: all
+  tasks:
+    - name: Create ssh directory
+      file:
+        path: ~/.ssh
+        state: directory
+        mode: 700
+    - name: Install authorized key from Ansible host
+      copy:
+        src: "{{ ansible_env.HOME }}/.ssh/id_rsa.pub"
+        dest: "{{ ansible_env.HOME }}/.ssh/authorized_keys"
+        mode: 0644
+
