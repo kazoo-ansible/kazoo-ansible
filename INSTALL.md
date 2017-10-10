@@ -108,7 +108,7 @@ Complete these steps on the Ansible Host that will run kazoo-ansible.
    ```bash
    :wq<enter>
    ```
-9. SSH into each Kazoo node to cache the password in known_hosts
+9. SSH into each Kazoo node to cache the host in known_hosts
    ```bash
    $ ssh kazoo.lan
    The authenticity of host 'kazoo.lan (127.0.0.1)' can't be established.
