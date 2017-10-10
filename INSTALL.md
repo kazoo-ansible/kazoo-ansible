@@ -158,6 +158,6 @@ Complete these steps on the Ansible Host that will run kazoo-ansible.
 4. Initialize MonsterUI Applications
    ```bash
    # Initialize MonsterUI using the Kazoo domain set in group_vars/all
-   $ sup crossbar_maintenance init_apps /var/www/html/monster-ui/apps https://kazoo_domain.lan/crossbar/v2
+   $ sup crossbar_maintenance init_apps /var/www/html/monster-ui/apps https://kazoo.lan/crossbar/v2
    ```
 
