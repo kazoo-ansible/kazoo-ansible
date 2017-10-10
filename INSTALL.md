@@ -88,16 +88,16 @@ Complete these steps on every Kazoo node that will be managed by kazoo-ansible.
    ```bash
    vi ~/.ssh/authorized_keys
    ```
-8. Save the authorized_keys file
-   ```bash
-   :wq<enter>
-   ```
-9. Copy paste the public key created on the Ansible Host
+8. Copy paste the public key created on the Ansible Host
    ```bash
    # Paste the public key copied to the clipboard above
    ssh-rsa AAA...qtb tnewman@kazoo.lan
    ```
-9. Modify the permissions of authorized_keys
+9. Save the authorized_keys file
+   ```bash
+   :wq<enter>
+   ```
+10. Modify the permissions of authorized_keys
    ```bash
    chmod 644 ~/.ssh/authorized_keys
    ```
