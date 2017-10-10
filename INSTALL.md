@@ -61,7 +61,7 @@ Complete these steps on every Kazoo node that will be managed by kazoo-ansible.
    ```bash
    ssh kazoo.lan
    ```
-2. Open the sudoers file
+2. Open the sudoers file (Hint: Press i for insert mode and Escape for command mode)
    ```bash
    sudo visudo
    ```
@@ -84,7 +84,7 @@ Complete these steps on every Kazoo node that will be managed by kazoo-ansible.
    mkdir ~/.ssh
    chmod 644 ~/.ssh
    ```
-7. Open the authorized_keys file
+7. Open the authorized_keys file (Hint: Press i for insert mode and Escape for command mode)
    ```bash
    vi ~/.ssh/authorized_keys
    ```
