@@ -114,7 +114,7 @@ Complete these steps on the Ansible Host that will run kazoo-ansible.
    ```
 10. Edit group_vars/all (Hint: Press i for insert mode and Escape for command mode)
     ```bash
-    vim group_vars/all
+    vi group_vars/all
     ```
 11. Modify group_vars based on your cluster configuration
     ```yaml
