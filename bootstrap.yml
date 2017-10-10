@@ -9,8 +9,8 @@
     
     - name: Install authorized key from Ansible host
       copy:
-        src: "{{ ansible_env.HOME }}/.ssh/id_rsa.pub"
-        dest: "{{ ansible_env.HOME }}/.ssh/authorized_keys"
+        src: ~/.ssh/id_rsa.pub
+        dest: ~/.ssh/authorized_keys
         mode: 0644
     
     - name: Enable passwordless sudo
