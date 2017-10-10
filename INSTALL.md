@@ -122,7 +122,8 @@ Complete these steps on the Ansible Host that will run kazoo-ansible.
 10. Bootstrap the Kazoo nodes
     ```bash
     # The bootstrap process assumes that all Kazoo nodes have the same 
-    # password if SSH login is not possible
+    # password if SSH login is not possible and that sudo root access 
+    # is available
     $ ansible-playbook bootstrap.yml --ask-pass --ask-sudo-pass
     SSH password: Your SSH password
     SUDO password[defaults to SSH password]: Your SSH password
