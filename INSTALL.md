@@ -1,5 +1,45 @@
 # kazoo-ansible Installation Instruction
 
+## Ansible Host Setup
+Complete these steps on the Ansible Host that will run kazoo-ansible.
+
+1. SSH into the Ansible host
+   ```bash
+   ssh kazoo-ansible.lan
+   ```
+2. Generate an SSH key that will be used to manage Kazoo nodes
+   ```bash
+   ssh-keygen
+   Generating public/private rsa key pair.
+   Enter file in which to save the key (/home/tnewman/.ssh/id_rsa):
+   Created directory '/home/tnewman/.ssh'.
+   Enter passphrase (empty for no passphrase):
+   Enter same passphrase again:
+   Your identification has been saved in /home/tnewman/.ssh/id_rsa.
+   Your public key has been saved in /home/tnewman/.ssh/id_rsa.pub.
+   The key fingerprint is:
+   SHA256:pGm0idNfRBpfr0BdQszc/sAxIs8PKlqrAuesmc5cXa4 tnewman@kazoo.lan
+   The key's randomart image is:
+   +---[RSA 2048]----+
+   |        . o*+o.  |
+   |         *..*o+  |
+   |      . o ++ +.o |
+   |     + * . .+.+  |
+   |    o B S ...o o |
+   |  . .+ +o..   . .|
+   |   =. .ooo       |
+   | o ++ ...        |
+   | .B. .E.         |
+   +----[SHA256]-----+
+   ```
+3. Copy the contents ~/.ssh/id_rsa.pub, so the public key can be used for the 
+   Kazoo Node Setup
+   ```bash
+   cat ~/.ssh/id_rsa.pub
+   # Copy this public key to the clipboard
+   ssh-rsa AAA...wLX tnewman@kazoo.lan
+   ```
+   
 ## Kazoo Node Setup
 Complete these steps on every Kazoo node that will be managed by kazoo-ansible.
 
@@ -34,8 +74,13 @@ Complete these steps on every Kazoo node that will be managed by kazoo-ansible.
    ```bash
    vim ~/.ssh/authorized_keys
    ```
-8. Copy paste the public key created on the Ansible Host
+8. Save the authorized_keys file
    ```bash
+   :wq<enter>
+   ```
+9. Copy paste the public key created on the Ansible Host
+   ```bash
+   # Paste the public key copied to the clipboard above
    ssh-rsa AAA...qtb tnewman@kazoo.lan
    ```
 9. Modify the permissions of authorized_keys
