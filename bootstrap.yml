@@ -19,6 +19,6 @@
         src: files/sudoers
         dest: /etc/sudoers
         owner: root
-        owner: root
+        group: root
         mode: 0440
 
