@@ -1,19 +1,19 @@
 # kazoo-ansible Installation Instruction
 
-## Ansible Host Setup
+## Setup
 Complete these steps on the Ansible Host that will run kazoo-ansible.
 
 1. SSH into the Ansible host
    ```bash
-   ssh kazoo-ansible.lan
+   $ ssh kazoo-ansible.lan
    ```
 2. Bootstrap the Ansible host
    ```bash
-   bash <(curl -s https://raw.githubusercontent.com/kazoo-ansible/kazoo-ansible/master/ansible_host_bootstrap.sh)
+   $ bash <(curl -s https://raw.githubusercontent.com/kazoo-ansible/kazoo-ansible/master/ansible_host_bootstrap.sh)
    ```
 3. Edit /etc/ansible/hosts (Hint: Press i for insert mode and Escape for command mode)
    ```bash
-   sudo vi /etc/ansible/hosts
+   $ sudo vi /etc/ansible/hosts
    ```
 4. Modify hosts based on your cluster configuration (these are merely suggested configurations)
    ```ini
@@ -72,7 +72,7 @@ Complete these steps on the Ansible Host that will run kazoo-ansible.
    ```
 6. Edit group_vars/all (Hint: Press i for insert mode and Escape for command mode)
    ```bash
-   vi group_vars/all
+   $ vi group_vars/all
    ```
 7. Modify group_vars based on your cluster configuration
    ```yaml
@@ -107,75 +107,43 @@ Complete these steps on the Ansible Host that will run kazoo-ansible.
    ```bash
    :wq<enter>
    ```
-
-## Kazoo Node Setup
-Complete these steps on every Kazoo node that will be managed by kazoo-ansible.
-
-1. SSH into the Kazoo node
+9. SSH into each Kazoo node to cache the password in known_hosts
    ```bash
-   ssh kazoo.lan
+   $ ssh kazoo.lan
+   The authenticity of host 'kazoo.lan (127.0.0.1)' can't be established.
+   ECDSA key fingerprint is SHA256:JtNSVrHMsgGAdFoek0R15Gm0Pjczi3kMOTgNSic0dq4.
+   ECDSA key fingerprint is MD5:6d:07:fc:a4:36:ac:89:23:5e:e6:a6:8d:1e:e6:fe:8d.
+   Are you sure you want to continue connecting (yes/no)? yes
+   Warning: Permanently added 'kazoo.lan' (ECDSA) to the list of known hosts.
+   Last login: Tue Oct 10 02:46:40 2017 from cnd4220hd2.lan
+   $ logout
    ```
-2. Open the sudoers file (Hint: Press i for insert mode and Escape for command mode)
-   ```bash
-   sudo visudo
-   ```
-3. Comment the wheel group line
-   ```bash
-   ## Allows people in group wheel to run all commands
-   # %wheel        ALL=(ALL)       ALL
-   ```
-4. Uncomment the passwordless wheel group
-   ```bash
-   ## Same thing without a password
-   %wheel  ALL=(ALL)       NOPASSWD: ALL
-   ```
-5. Save the sudoers file
-   ```bash
-   :wq<enter>
-   ```
-6. Create the .ssh directory
-   ```bash
-   mkdir ~/.ssh
-   chmod 700 ~/.ssh
-   ```
-7. Open the authorized_keys file (Hint: Press i for insert mode and Escape for command mode)
-   ```bash
-   vi ~/.ssh/authorized_keys
-   ```
-8. Copy paste the public key created on the Ansible Host
-   ```bash
-   # Paste the public key copied to the clipboard above
-   ssh-rsa AAA...qtb tnewman@kazoo.lan
-   ```
-9. Save the authorized_keys file
-   ```bash
-   :wq<enter>
-   ```
-10. Modify the permissions of authorized_keys
+10. Bootstrap the Kazoo nodes
     ```bash
-    chmod 644 ~/.ssh/authorized_keys
+    $ ansible-playbook bootstrap.yml --ask-pass --ask-sudo-pass
+    SSH password:
+    SUDO password[defaults to SSH password]:
     ```
-
 ## Running kazoo-ansible Playbook
 1. SSH into the Ansible host
    ```bash
-   ssh kazoo-ansible.lan
+   $ ssh kazoo-ansible.lan
    ```
 2. Run the kazoo-ansible Ansible Playbook
    ```bash
-   cd ~/kazoo-ansible
-   ansible-playbook site.yml
+   $ cd ~/kazoo-ansible
+   $ ansible-playbook site.yml
    ```
 
 ## Post Playbook Steps
 1. SSH into one of the Kazoo nodes with the kazoo role
    ```bash
-   ssh kazoo.lan
+   $ ssh kazoo.lan
    ```
 2. Import FreeSwitch Media
    ```bash
    # EN-US prompts
-   sup kazoo_media_maintenance import_prompts /opt/kazoo/sounds/en/us/
+   $ sup kazoo_media_maintenance import_prompts /opt/kazoo/sounds/en/us/
    
    # Add additional prompts as needed
    # sup kazoo_media_maintenance import_prompts /opt/kazoo/sounds/fr/ca fr-ca
@@ -183,10 +151,11 @@ Complete these steps on every Kazoo node that will be managed by kazoo-ansible.
 3. Create the Kazoo Master Administrator Account
    ```bash
    # Create an account with your own account name, realm, username, and password
-   sup crossbar_maintenance create_account YOUR_ACCOUNT_NAME YOUR_REALM YOUR_USERNAME YOUR_PASSWORD
+   $ sup crossbar_maintenance create_account YOUR_ACCOUNT_NAME YOUR_REALM YOUR_USERNAME YOUR_PASSWORD
    ```
 4. Initialize MonsterUI Applications
    ```bash
    # Initialize MonsterUI using the Kazoo domain set in group_vars/all
-   sup crossbar_maintenance init_apps /var/www/html/monster-ui/apps https://kazoo_domain.lan/crossbar/v2
+   $ sup crossbar_maintenance init_apps /var/www/html/monster-ui/apps https://kazoo_domain.lan/crossbar/v2
    ```
+
