@@ -15,9 +15,9 @@
     
     - name: Enable passwordless sudo
       become: true
-      file:
-        src: files/sudoers
-        dest: /etc/sudoers
+      copy:
+        src: files/passwordless_sudo
+        dest: /etc/sudoers.d/passwordless_sudo
         owner: root
         group: root
         mode: 0440
