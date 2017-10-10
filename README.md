@@ -18,6 +18,7 @@ guarantees.
   and RabbitMQ to allow lots of cluster custimization
 - Publishes roles to Ansible Galaxy to allow easy integration into 
   custom playbooks
+- Easy to install using included bootstrap scripts
 
 ## Desired Future Improvements
 - Support for multiple zones
