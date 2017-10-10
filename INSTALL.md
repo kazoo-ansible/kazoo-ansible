@@ -178,7 +178,7 @@ Complete these steps on every Kazoo node that will be managed by kazoo-ansible.
 6. Create the .ssh directory
    ```bash
    mkdir ~/.ssh
-   chmod 644 ~/.ssh
+   chmod 700 ~/.ssh
    ```
 7. Open the authorized_keys file (Hint: Press i for insert mode and Escape for command mode)
    ```bash
