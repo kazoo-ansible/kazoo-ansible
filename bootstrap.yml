@@ -5,7 +5,7 @@
       file:
         path: ~/.ssh
         state: directory
-        mode: 700
+        mode: 0700
     - name: Install authorized key from Ansible host
       copy:
         src: "{{ ansible_env.HOME }}/.ssh/id_rsa.pub"
