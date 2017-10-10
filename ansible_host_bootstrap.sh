@@ -18,7 +18,7 @@ git clone https://github.com/kazoo-ansible/kazoo-ansible ~/kazoo-ansible
 echo "Installing kazoo-ansible Roles"
 sudo ansible-galaxy install -r ~/kazoo-ansible/requirements.yml
 
-if [ -e "~/.ssh/id_rsa" -a -e "~/.ssh/id_rsa.pub" ]; then
+if [[ -f ~/.ssh/id_rsa -a -f ~/.ssh/id_rsa.pub ]]; then
     echo "SSH keypair exists. Skipping..."
 else
     echo "Generating SSH keypair"
