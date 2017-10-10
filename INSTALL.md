@@ -53,6 +53,102 @@ Complete these steps on the Ansible Host that will run kazoo-ansible.
    cd ~/kazoo-ansible
    sudo ansible-galaxy install -r requirements.yml
    ```
+7. Edit /etc/ansible/hosts (Hint: Press i for insert mode and Escape for command mode)
+   ```bash
+   sudo vi /etc/ansible/hosts
+   ```
+8. Modify hosts based on your cluster configuration (these are merely suggested configurations)
+   ```ini
+   # Single node cluster
+   [kazoo]
+   kazoo.lan
+   
+   [monsterui]
+   kazoo.lan
+   
+   [couchdb]
+   kazoo.lan
+   
+   [rabbitmq]
+   kazoo.lan
+   
+   [kamailio]
+   kazoo.lan
+   
+   [freeswitch]
+   kazoo.lan
+   
+   # Multiple node cluster
+   [kazoo]
+   kazoo1.lan
+   kazoo2.lan
+   kazoo3.lan
+   
+   [monsterui]
+   kazoo1.lan
+   kazoo2.lan
+   kazoo3.lan
+   
+   [couchdb]
+   kazoo1.lan
+   kazoo2.lan
+   kazoo3.lan
+   
+   [rabbitmq]
+   kazoo1.lan
+   kazoo2.lan
+   
+   [kamailio]
+   kazoo1.lan
+   kazoo2.lan
+   kazoo3.lan
+   
+   [freeswitch]
+   kazoo1.lan
+   kazoo2.lan
+   kazoo3.lan
+   ```
+9. Save hosts
+   ```bash
+   :wq<enter>
+   ```
+10. Edit group_vars/all (Hint: Press i for insert mode and Escape for command mode)
+    ```bash
+    vim group_vars/all
+    ```
+11. Modify group_vars based on your cluster configuration
+    ```yaml
+    ---
+    # The domain used to access Monster UI
+    kazoo_domain: kazoo.lan
+    
+    # Enables Let's Encrypt. Set to no to manage TLS certificates manually
+    kazoo_enable_lets_encrypt: yes
+    
+    # Usernames that can either be left alone or changed
+    couch_user: couchdb
+    rabbitmq_user: rabbitmq
+    
+    # Passwords and cookies that should definitely be changed
+    erlang_cookie: changeme
+    rabbitmq_password: changeme
+    couch_password: changeme
+    
+    # Manually-managed TLS certificate to secure Crossbar and MonsterUI if 
+    # Let's Encrypt is disabled
+    kazoo_tls_certificate: |
+      -----BEGIN CERTIFICATE-----
+      Your certificate here!
+      -----END CERTIFICATE-----
+    kazoo_tls_private_key: |
+      -----BEGIN PRIVATE KEY-----
+      Your private key here
+      -----END PRIVATE KEY-----
+    ```
+12. Save group_vars
+    ```bash
+    :wq<enter>
+    ```
 
 ## Kazoo Node Setup
 Complete these steps on every Kazoo node that will be managed by kazoo-ansible.
