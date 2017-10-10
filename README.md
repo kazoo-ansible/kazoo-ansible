@@ -27,18 +27,8 @@ guarantees.
 MIT License
 
 ## Installation Instructions
-- Install CentOS 7 on all of the hosts that will be managed by kazoo-ansible
-- Enable password-less SSH for the user that will run kazoo-ansible on all of 
-the hosts that will be managed by kazoo-ansible
-- Enable password-less sudo on all of the hosts that will be managed by 
-kazoo ansible
-- Install all of the roles from [kazoo-ansible at Ansible Galaxy](https://galaxy.ansible.com/kazoo-ansible/)
-- Clone this GitHub repository
-- Edit `group_vars/all` and `site.yml` to your liking
-- Add hosts for each role in `site.yml` in `/etc/ansible/hosts`
-- Run `ansible-playbook site.yml`
-- SSH into one of the Kazoo servers, import media, create the first admin 
-account, and setup the Monster UI applications
+Check out the [Installation Instructions](INSTALL.md) to install 
+kazoo-ansible.
 
 ## Using kazoo-ansible with Existing Playbooks
 If you want to use kazoo-ansible with existing playbooks, simply
