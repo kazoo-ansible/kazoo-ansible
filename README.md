@@ -32,7 +32,9 @@ Check out the [Installation Instructions](INSTALL.md) to install
 kazoo-ansible.
 
 ## Using kazoo-ansible with Existing Playbooks
-If you want to use kazoo-ansible with existing playbooks, simply
+If you want to use kazoo-ansible with existing playbooks, simply 
+include the roles in your playbook rather than using the playbook 
+in this repository.
 
 ## Contributions
 There are many ways to contribute:
