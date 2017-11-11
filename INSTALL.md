@@ -1,5 +1,10 @@
 # kazoo-ansible Installation Instruction
 
+## Prerequisites
+1. CentOS 7 for the Ansible host and all managed hosts
+
+All other environments are untested and unsupported.
+
 ## Setup
 Complete these steps on the Ansible Host that will run kazoo-ansible.
 
