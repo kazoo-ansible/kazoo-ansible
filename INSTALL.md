@@ -141,7 +141,7 @@ Complete these steps on the Ansible Host that will run kazoo-ansible.
 2. Run the kazoo-ansible Ansible Playbook
    ```bash
    $ cd ~/kazoo-ansible
-   $ ansible-playbook ~/kazoo-ansible/site.yml
+   $ ansible-playbook site.yml
    ```
 
 ## Post Playbook Steps
