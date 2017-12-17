@@ -2,6 +2,7 @@
 - src: kazoo-ansible.common
 - src: kazoo-ansible.updates
 - src: kazoo-ansible.couchdb
+- src: kazoo-ansible.couchdb-google-storage-backup
 - src: kazoo-ansible.rabbitmq
 - src: kazoo-ansible.kazoo
 - src: kazoo-ansible.monsterui
