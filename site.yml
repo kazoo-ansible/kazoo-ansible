@@ -8,6 +8,9 @@
   become: true
   roles:
   - kazoo-ansible.couchdb
+  # Uncomment couchdb-google-storage-backup to add daily backup 
+  # scripts to backup CouchDB to Google Cloud Storage
+  # - kazoo-ansible.couchdb-google-storage-backup
 
 - hosts: rabbitmq
   become: true

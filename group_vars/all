@@ -63,3 +63,10 @@ rabbitmq_password: lasf34G8fgarefae
 couch_user: couchdb
 couch_password: 7865Fihfa34f3wfawe4F
 
+# CouchDB Google Cloud Storage Backup Settings
+# Uncomment and modify these settings are only required if 
+# the couchdb-google-storage-backup role is used
+# couchdb_google_storage_backup_bucket_name: Your Google Cloud Storage bucket name here
+# couchdb_google_storage_backup_service_account_key: |
+#   Your Google Cloud Service credentials.json contents here
+
