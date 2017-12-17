@@ -75,56 +75,118 @@ Complete these steps on the Ansible Host that will run kazoo-ansible.
    ```bash
    :wq<enter>
    ```
-6. Edit group_vars/all (Hint: Press i for insert mode and Escape for command mode)
+6. Edit site.yml (Hint: Press i for insert mode and Escape for command mode)
+   ```bash
+   $ cd ~/kazoo-ansible
+   $ vi site.yml
+   ```
+7. Modify site.yml to add optional or custom roles
+   ```yaml
+   ---
+   - hosts: all
+     become: true
+     roles:
+     - kazoo-ansible.common
+   
+   - hosts: couchdb
+     become: true
+     roles:
+     - kazoo-ansible.couchdb
+     # Uncomment couchdb-google-storage-backup to add daily backup 
+     # scripts to backup CouchDB to Google Cloud Storage
+     # - kazoo-ansible.couchdb-google-storage-backup
+   
+   - hosts: rabbitmq
+     become: true
+     roles:
+     - kazoo-ansible.rabbitmq
+   
+   - hosts: freeswitch
+     become: true
+     roles:
+     - kazoo-ansible.freeswitch
+   
+   - hosts: kamailio
+     become: true
+     roles:
+     - kazoo-ansible.kamailio
+   
+   - hosts: kazoo
+     become: true
+     roles:
+     - kazoo-ansible.kazoo
+   
+   - hosts: monsterui
+     become: true
+     roles:
+     - kazoo-ansible.monsterui
+   
+   - hosts: all
+     become: true
+     roles:
+     - kazoo-ansible.updates
+   ```
+8. Save site.yml
+   ```bash
+   :wq<enter>
+   ```
+9. Edit group_vars/all (Hint: Press i for insert mode and Escape for command mode)
    ```bash
    $ cd ~/kazoo-ansible
    $ vi group_vars/all
    ```
-7. Modify group_vars based on your cluster configuration
-   ```yaml
-   ---
-   # The domain used to access Monster UI
-   kazoo_domain: kazoo.lan
-   
-   # Enables Let's Encrypt. Set to no to manage TLS certificates manually
-   kazoo_enable_lets_encrypt: yes
+10. Modify group_vars based on your cluster configuration
+    ```yaml
+    ---
+    # The domain used to access Monster UI
+    kazoo_domain: kazoo.lan
     
-   # Usernames that can either be left alone or changed
-   couch_user: couchdb
-   rabbitmq_user: rabbitmq
-   
-   # Passwords and cookies that should definitely be changed
-   erlang_cookie: changeme
-   rabbitmq_password: changeme
-   couch_password: changeme
-   
-   # Manually-managed TLS certificate to secure Crossbar and MonsterUI if 
-   # Let's Encrypt is disabled
-   kazoo_tls_certificate: |
-     -----BEGIN CERTIFICATE-----
-     Your certificate here!
-     -----END CERTIFICATE-----
-   kazoo_tls_private_key: |
-     -----BEGIN PRIVATE KEY-----
-     Your private key here
-     -----END PRIVATE KEY-----
-   ```
-8. Save group_vars
-   ```bash
-   :wq<enter>
-   ```
-9. SSH into each Kazoo node to cache the host in known_hosts
-   ```bash
-   $ ssh kazoo.lan
-   The authenticity of host 'kazoo.lan (127.0.0.1)' can't be established.
-   ECDSA key fingerprint is SHA256:JtNSVrHMsgGAdFoek0R15Gm0Pjczi3kMOTgNSic0dq4.
-   ECDSA key fingerprint is MD5:6d:07:fc:a4:36:ac:89:23:5e:e6:a6:8d:1e:e6:fe:8d.
-   Are you sure you want to continue connecting (yes/no)? yes
-   Warning: Permanently added 'kazoo.lan' (ECDSA) to the list of known hosts.
-   Last login: Tue Oct 10 02:46:40 2017 from cnd4220hd2.lan
-   $ logout
-   ```
-10. Bootstrap the Kazoo nodes
+    # Enables Let's Encrypt. Set to no to manage TLS certificates manually
+    kazoo_enable_lets_encrypt: yes
+    
+    # Usernames that can either be left alone or changed
+    couch_user: couchdb
+    rabbitmq_user: rabbitmq
+    
+    # Passwords and cookies that should definitely be changed
+    erlang_cookie: changeme
+    rabbitmq_password: changeme
+    couch_password: changeme
+    
+    # Manually-managed TLS certificate to secure Crossbar and MonsterUI if 
+    # Let's Encrypt is disabled
+    kazoo_tls_certificate: |
+      -----BEGIN CERTIFICATE-----
+      Your certificate here!
+      -----END CERTIFICATE-----
+    kazoo_tls_private_key: |
+      -----BEGIN PRIVATE KEY-----
+      Your private key here
+      -----END PRIVATE KEY-----
+    
+    # CouchDB Google Cloud Storage Backup Settings
+    # These settings are only required if the couchdb-google-storage-backup 
+    # role is used
+    couchdb_google_storage_backup_bucket_name: Your Google Cloud Storage bucket name here
+    couchdb_google_storage_backup_service_account_key: |
+      Your Google Cloud Service credentials.json contents here
+    ```
+11. Save group_vars
+    ```bash
+    :wq<enter>
+    ```
+12. SSH into each Kazoo node to cache the host in known_hosts
+    ```bash
+    $ ssh kazoo.lan
+    The authenticity of host 'kazoo.lan (127.0.0.1)' can't be established.
+    ECDSA key fingerprint is SHA256:JtNSVrHMsgGAdFoek0R15Gm0Pjczi3kMOTgNSic0dq4.
+    ECDSA key fingerprint is MD5:6d:07:fc:a4:36:ac:89:23:5e:e6:a6:8d:1e:e6:fe:8d.
+    Are you sure you want to continue connecting (yes/no)? yes
+    Warning: Permanently added 'kazoo.lan' (ECDSA) to the list of known hosts.
+    Last login: Tue Oct 10 02:46:40 2017 from cnd4220hd2.lan
+    $ logout
+    ```
+13. Bootstrap the Kazoo nodes
     ```bash
     # The bootstrap process assumes that all Kazoo nodes have the same 
     # password if SSH login is not possible and that sudo root access 
